@@ -1,0 +1,1 @@
+{"name":"Local: ConstructPermutation","url":"/Users/ojasvikumar/Coding/Java/ConstructPermutation.java","tests":[{"id":1724171197589,"input":"3\n1\n2\n3\n","output":"1\n-1\n3 1 2"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/ConstructPermutation.java","group":"local","local":true}
