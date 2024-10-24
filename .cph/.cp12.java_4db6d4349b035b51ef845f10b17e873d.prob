@@ -1,0 +1,1 @@
+{"name":"Local: cp12","url":"/Users/ojasvikumar/Coding/Java/cp12.java","tests":[{"id":1729785079733,"input":"3\n5\n2 1 -3 2 1\n7\n12 -4 4 43 -3 -5 8\n6\n0 -4 0 3 0 1\n","output":"1\n2\n3\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/cp12.java","group":"local","local":true}
