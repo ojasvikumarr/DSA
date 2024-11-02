@@ -2,7 +2,7 @@ package LeetCode;
 
 import java.util.*;
 
-public class Day1 {
+public class Day29 {
     public static int minSteps(String s, String t) {
         HashMap<Character, Integer> map = new HashMap<>();
 
