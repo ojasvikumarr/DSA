@@ -25,6 +25,7 @@ public class Day37 {
             if(n <= 1) return false ;
             for(int i = 2 ; i <= Math.sqrt(n) ; i++){
                 if(n%i == 0) return false ;
+                System.out.println("Hello");
             }
             return true ;
         }
