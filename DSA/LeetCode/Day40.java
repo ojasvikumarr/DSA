@@ -31,7 +31,7 @@ public class Day40 {
                     j++;
                 }
             }
-            
+            System.out.println("Hello Leetcode");
             return result;
         }
     }
