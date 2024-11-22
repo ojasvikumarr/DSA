@@ -16,7 +16,7 @@ public class StringBuilder{
     //char[] ch ;
     }
 
-    public void append(char charAt) {
+    public void append(int bit) {
     }
 
     public StringBuilder append(String string) {
