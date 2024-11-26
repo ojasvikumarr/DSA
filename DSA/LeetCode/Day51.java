@@ -2,7 +2,7 @@ public class Day51 {
     class Solution {
         public int findChampion(int n, int[][] edges) {
             boolean[] isUndefeated = new boolean[n];
-            // Arrays.fill(isUndefeated, true);
+            Arrays.fill(isUndefeated, true);
             
             for (int[] edge : edges) {
                 int winner = edge[0];
