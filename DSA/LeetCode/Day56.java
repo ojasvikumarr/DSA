@@ -8,6 +8,7 @@ public class Day56 {
                 return true;
             }
             set.add(num);
+            System.out.println("Hello");
         }
         return false;
     }
