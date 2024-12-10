@@ -1,3 +1,5 @@
+package Graphs;
+
 import java.util.*;
 
 public class Kruskal {
@@ -71,7 +73,7 @@ public class Kruskal {
             int parB = find(e.dest);
             // if the parents are equal then we dont have to do anything
             if (parA != parB) {
-                union(e.src, e.dest);
+                union(e.src, e.dest)
                 mstCost += e.wt;
                 count++;
             }
