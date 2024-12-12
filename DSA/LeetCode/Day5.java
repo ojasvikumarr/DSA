@@ -1,5 +1,5 @@
+package LeetCode;
 import java.util.*;
-
 class Solution {
     public boolean uniqueOccurrences(int[] arr) {
         HashMap<Integer, Integer> map = new HashMap<>();

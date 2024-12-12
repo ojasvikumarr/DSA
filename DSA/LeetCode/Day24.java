@@ -1,3 +1,5 @@
+package LeetCode ;
+
 public class Day24 {
     public static int CherryPickup(int i , int j1 , int j2 , int n , int m , int[][] grid , int[][][] dp){
         if(j1 < 0 || j2 > 0 || j1 >= m || j2 >= m){

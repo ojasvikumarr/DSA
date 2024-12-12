@@ -1,3 +1,4 @@
+package LeetCode;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -38,7 +39,7 @@ public class CourseScheduleII {
         }
         return order ;
     }
-}
+
 
 
 
@@ -108,4 +109,5 @@ class Solution {
         }
         stack.push(course);
     }
+}
 }

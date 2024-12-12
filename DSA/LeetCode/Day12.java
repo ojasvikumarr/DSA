@@ -1,3 +1,5 @@
+package LeetCode;
+
 public class Day12 {
     public int maxSumAfterPartitioning(int[] arr, int k){
         int subarray[] = new int[arr.length];

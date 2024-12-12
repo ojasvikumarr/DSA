@@ -1,3 +1,4 @@
+package LeetCode;
 public class Contest {
     public String triangleType(int[] nums) {
         int a = nums[0];

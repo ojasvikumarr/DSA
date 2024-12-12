@@ -1,3 +1,5 @@
+package LeetCode;
+
 import java.util.* ;
 class Day10 {
     class Edge {
