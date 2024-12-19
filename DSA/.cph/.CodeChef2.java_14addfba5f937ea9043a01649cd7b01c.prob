@@ -1,0 +1,1 @@
+{"name":"Local: CodeChef2","url":"/Users/ojasvikumar/Coding/Java/DSA/CodeChef2.java","tests":[{"id":1734536706667,"input":"4\n4\n0011\n5\n10001\n5\n01010\n4\n1001","output":"Yes\nNo\nYes\nYes"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/DSA/CodeChef2.java","group":"local","local":true}
