@@ -26,7 +26,7 @@ public class Count3s {
         int limit = flag ? s.charAt(idx) - '0' : 9;
         int ans = 0;
         for (int i = 0; i <= limit; i++) {
-            int newCnt = cnt + (i == 3 ? 1 : 0);
+            int newCnt = cnt + (i == 1 ? 1 : 0);
             ans += Solve(s, idx + 1, flag && (i == s.charAt(idx) - '0'), newCnt);
         }
 
@@ -34,6 +34,6 @@ public class Count3s {
     }
 
     public static void main(String[] argv) {
-        System.out.println(countNoOf3s(20)); // Example test
+        System.out.println(countNoOf3s(13)); // Example test
     }
 }
