@@ -1,3 +1,5 @@
+package DynamicProgramming;
+import java.util.Arrays ;
 public class GuessNumber {
     class Solution {
         int[][] dp ;
@@ -19,3 +21,4 @@ public class GuessNumber {
         }
     }
 }
+
