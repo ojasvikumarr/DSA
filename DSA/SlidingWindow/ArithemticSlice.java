@@ -1,3 +1,4 @@
+package SlidingWindow;
 public class ArithemticSlice {
     class Solution {
         public int numberOfArithmeticSlices(int[] arr) {
