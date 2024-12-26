@@ -1,3 +1,6 @@
+package Graphs;
+import java.util.* ;
+
 public class CatandMouse {
     class Solution {
         final int DRAW = 0, MOUSE_WIN = 1, CAT_WIN = 2, MOUSE_TURN = 1, CAT_TURN = 2;
