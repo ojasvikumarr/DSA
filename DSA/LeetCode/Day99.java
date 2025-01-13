@@ -1,4 +1,4 @@
-Package LeetCode ; 
+package LeetCode ; 
 public class Day99 {
     class Solution {
         public int minimumLength(String s) {
