@@ -1,0 +1,1 @@
+{"name":"Local: FrogGame","url":"/Users/ojasvikumar/Coding/Java/FrogGame.java","tests":[{"id":1736693626777,"input":"5\n2 1 2\n3 3 1\n4 2 3\n5 2 4\n7 6 2\n","output":"NO\nYES\nNO\nYES\nYES\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/FrogGame.java","group":"local","local":true}
