@@ -5,6 +5,72 @@ import java.util.Queue;
 import java.util.* ; 
 
 public class Day105 {
+    int MOD = 1000000009 ;
+    public int solveV(int[] nums , int k){
+        int n = nums.length;
+
+        long[] inv = new long[n + 2];
+        inv[0] = 1;
+        inv[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            inv[i] = MOD - (MOD / i) * inv[MOD % i] % MOD;
+        }
+
+        int primeK = k - 1;
+
+        long[] ar = new long[n + 1];
+        if (primeK >= 1) {
+            ar[primeK] = 1;
+            for (int m = primeK + 1; m <= n; m++) {
+                ar[m] = (ar[m - 1] * m) % MOD;
+                ar[m] = (ar[m] * inv[m - primeK]) % MOD;
+            }
+        }
+        long[] sumC = new long[n + 1];
+        if (primeK < 1) {
+            Arrays.fill(sumC, 1);
+        } else {
+            sumC[0] = 1;
+            for (int m = 1; m <= n; m++) {
+                sumC[m] = (2 * sumC[m - 1]) % MOD;
+                if (m - 1 >= primeK) {
+                    sumC[m] = (sumC[m] - ar[m - 1] + MOD) % MOD;
+                }
+            }
+        }
+        int[] sortedAsc = Arrays.copyOf(nums, n);
+        Arrays.sort(sortedAsc);
+        int[] sortedDesc = Arrays.copyOf(sortedAsc, n);
+        // System.out.println("yes");
+        for (int i = 0; i < n / 2; i++) {
+            int temp = sortedDesc[i];
+            sortedDesc[i] = sortedDesc[n - i - 1];
+            sortedDesc[n - i - 1] = temp;
+        }
+        long sumMin = 0;
+        for (int i = 0; i < n; i++) {
+            int m = n - i - 1;
+            if (m < 0) continue;
+            long contrib = sortedAsc[i];
+            if (m >= 0) {
+                contrib = (contrib * sumC[m]) % MOD;
+            }
+            sumMin = (sumMin + contrib) % MOD;
+        }
+
+        long sumMax = 0;
+        for (int i = 0; i < n; i++) {
+            int m = n - i - 1;
+            if (m < 0) continue;
+            long contrib = sortedDesc[i];
+            if (m >= 0) {
+                contrib = (contrib * sumC[m]) % MOD;
+            }
+            sumMax = (sumMax + contrib) % MOD;
+        }
+        long total = (sumMin + sumMax) % MOD;
+        return (int) total;
+    }
     class Solution {
     //tis is all the directions 
     int[][] dir = new int[][] {{0 , 1} , {0 , -1} , {1 , 0} , {-1 , 0}};
