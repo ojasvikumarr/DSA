@@ -21,15 +21,12 @@ public class Main {
         
         //We need to keep track of their index 
         //We will keep the max index in map 
-        Map<Integer , Deque<Integer>> map = new HashMap<>();
-        for(int i = 0 ; i < 10 ; i++){
-            map.put(i , new ArrayDeque<>());
-        }
+        Map<Integer , Integer> map = new HashMap<>();
         for(int i = 0 ; i < m ; i++){
             char c = t.charAt(i);
             int num = c-'0';
             freq[num]++ ;
-            map.get(num ).add(i);
+            map.put(num , Math.max(map.getOrDefault(num , 0) , i));
         }
         //Now we will traverse String s 
         StringBuilder sb = new StringBuilder(s);
@@ -47,19 +44,17 @@ public class Main {
                         sb.setCharAt(i , (char)(num+'0')) ; 
                         // System.out.println("Ping!!" + sb);
                         if(map.containsKey(num))
-                        maxi = Math.max(maxi , map.get(num).pollLast());
+                        maxi = Math.max(maxi , map.get(num));
                         break ;
                     }
                     i++ ;
                 }
                 if(placed == false){
                     //that is the num is not placed we need to check maxi 
-                    int index = -1 ;
-                    if(map.containsKey(num)) index = map.get(num).pollFirst() ;
-                    if(index !=-1 && index > maxi){
+                    if(map.containsKey(num) && map.get(num) > maxi){
                         //we will place at last 
                         sb.setCharAt(sb.length()-1 , (char)(num+'0')) ;
-                        maxi = index;
+                        maxi = map.get(num);
                     }
                 }
                 freq[j]-- ;
