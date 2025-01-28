@@ -48,6 +48,7 @@ public class MaxNumberAtCodersDiv2 {
                         // System.out.println("Ping!!" + sb);
                         if(map.containsKey(num))
                         maxi = Math.max(maxi , map.get(num));
+                        i++ ;
                         break ;
                     }
                     i++ ;
