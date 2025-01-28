@@ -1,9 +1,10 @@
+package AtCoders;
 // package AtCoders;
 //Remove this package when submitting the answer 
 import java.util.* ;
 import java.lang.StringBuilder;
 // import java.math.BigInteger; 
-public class Main {
+public class MaxNumberAtCodersDiv2 {
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
@@ -14,6 +15,8 @@ public class Main {
         solve(s, t, n, m);
         sc.close();
     }
+
+
     public static void solve(String s, String t , int n , int m){
         //We will sort the frequencies 
         //Or we can just make a freq map 
