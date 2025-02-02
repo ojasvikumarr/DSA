@@ -1,0 +1,1 @@
+{"name":"Local: cp19","url":"/Users/ojasvikumar/Coding/Java/cp19.java","tests":[{"id":1738512633060,"input":"4\n3 2\n1 1 1\n8 8\n1 1 2 2 3 3 4 4\n5 4\n1 1 1 2 2\n5 4\n1 1 1000000000 2 2\n","output":"2\n5\n2\n1\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/cp19.java","group":"local","local":true}
