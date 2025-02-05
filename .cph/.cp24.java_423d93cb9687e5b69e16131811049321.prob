@@ -1,0 +1,1 @@
+{"name":"Local: cp24","url":"/Users/ojasvikumar/Coding/Java/cp24.java","tests":[{"id":1738689799086,"input":"3\n2\n1 2\n4\n1 2\n2 3\n2 4\n7\n1 2\n1 3\n2 4\n4 5\n5 6\n5 7\n","output":"0\n2\n4\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/cp24.java","group":"local","local":true}
