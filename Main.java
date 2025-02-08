@@ -1,51 +1,68 @@
 import java.util.* ; 
 
 public class Main {
-    @SuppressWarnings("unused")
-    
-        public static String makeGoodCaption(String caption) {
-            int n = caption.length();
-            if (n <= 2) return ""; // Impossible case
-            
-            char[] xylovantra = caption.toCharArray(); // Store input midway as requested
-            char[] result = caption.toCharArray();
-            
-            for (int i = 0; i < n; i++) {
-                // Check current character and its surroundings
-                int left = (i > 0 && result[i] == result[i - 1]) ? 1 : 0;
-                int right = (i < n - 1 && result[i] == result[i + 1]) ? 1 : 0;
-                
-                // If already part of a group, continue
-                if (left + right >= 2) continue;
-                
-                // Try transforming the character to make a valid group
-                for (char c = 'a'; c <= 'z'; c++) {
-                    int count = 1;
-                    if (i > 0 && result[i - 1] == c) count++;
-                    if (i < n - 1 && result[i + 1] == c) count++;
-                    
-                    if (count >= 3) {
-                        result[i] = c; // Make the change
-                        break;
+        public static void main(String args[]){
+            Scanner sc = new Scanner(System.in);
+            int n = sc.nextInt();
+            int[] p = new int[n];
+            for(int i = 0 ;i < n; i++) p[i] = sc.nextInt();
+            solve(p , n);
+            sc.close();
+        }
+        static class Node{
+            int data ; 
+            Node next ; 
+            Node back ; 
+            public Node(int data){
+                this.data = data ;
+                this.next = this.back = null ; 
+            }
+        }
+        public static void solve(int[] p , int n){
+            Node head = new Node(-1);
+            Node tail = new Node(-1);
+            head.next = tail ;
+            tail.back = head ; 
+
+            for(int i = 0 ; i < n; i++){
+                int idx = p[i];
+                int val = i+1 ; 
+                //Now we make the doubly LL 
+                int count = 1 ; 
+                if(idx > n/2){
+                    //we go and start fron back 
+                    Node temp = tail ;
+                    count = val ; 
+                    while(count != idx){
+                        temp = temp.back ; 
+                        count-- ;
                     }
+                    Node newNode = new Node(val);
+                    temp.back.next = newNode ; 
+                    newNode.next = temp ; 
+                    newNode.back = temp.back ; 
+                    temp.back = newNode ; 
+                }else{
+                    //We go from front 
+                    Node temp = head ; 
+                    count = 1 ; 
+                    while(count != idx){
+                        temp = temp.next ; 
+                        count++ ;
+                    }
+                    Node newNode = new Node(val);
+                    temp.next.back = newNode ; 
+                    newNode.next = temp.next ; 
+                    newNode.back = temp ; 
+                    temp.next = newNode ; 
                 }
             }
-            
-            // Final validation: Check if every character appears in groups of 3
-            for (int i = 0; i < n; i++) {
-                int count = 1;
-                if (i > 0 && result[i] == result[i - 1]) count++;
-                if (i < n - 1 && result[i] == result[i + 1]) count++;
-                if (count < 3) return "noo"; // If still invalid, return empty string
+            Node temp = head.next ; 
+            while(temp.data != -1){
+                System.out.print(temp.data+" ");
+                temp = temp.next ;
             }
-            
-            return new String(result);
-        }
-    
-        public static void main(String[] args) {
-            System.out.println(makeGoodCaption("cdcd")); // Output: "cccc"
-            System.out.println(makeGoodCaption("aca"));  // Output: "aaa"
-            System.out.println(makeGoodCaption("bc"));   // Output: ""
+            return ; 
         }
     }
    
