@@ -22,7 +22,7 @@ public class ArticulationPoints {
         }
         if(parent == -1 && child > 0){
             articulation[curr] = 1 ; 
-        }
+        
     }
 
 }
