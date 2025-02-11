@@ -80,6 +80,23 @@ public class CablesAndServers {
                 }
             }
         }
+
+
+
+
+
+        Map<Integer , List<Integer>> compEdge = new HashMap<>();
+        for(int[] exEdge : extraEdges){
+            int idx = exEdge[0];
+            int a = exEdge[1];
+            // int b = exEdge[2];
+            int ultPar = find(a);
+            compEdge.putIfAbsent(ultPar , new ArrayList<>());
+            compEdge.get(ultPar).add(idx);
+        }
+
+
+
         sc.close();
     }
     public static void solve(int[][] edges , int n , int m){
