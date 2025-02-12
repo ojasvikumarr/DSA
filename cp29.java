@@ -6,7 +6,7 @@ public class cp29 {
         int t = sc.nextInt();
         while(t-- > 0){
             long n = sc.nextInt();
-            solveIII(n);
+            solveII(n);
         }
         sc.close() ; 
     }
@@ -44,6 +44,10 @@ public class cp29 {
                     min = Math.min(min , k);
                 }
                 newN /= 10 ; 
+            }
+            if(min != Integer.MAX_VALUE){
+                System.out.println(min);
+                return ; 
             }
             mini = Math.min(mini , min);
             k++ ; 
