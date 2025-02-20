@@ -1,0 +1,1 @@
+{"name":"Local: cp30","url":"/Users/ojasvikumar/Coding/Java/cp30.java","tests":[{"id":1740046753875,"input":"3\n10\n0 1 0 0 0 0 1 1\n3\n1\n10\n0 1 0 1 1 0 0 1\n","output":"YES\nYES\nNO\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/cp30.java","group":"local","local":true}
