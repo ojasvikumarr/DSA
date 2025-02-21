@@ -9,15 +9,52 @@ public class cp32 {
             int[] arr = new int[n];
             for(int i = 0 ; i < n ; i++) arr[i] = sc.nextInt();
             // solve(arr , n);    
-            int result = 0 ; 
-            for(int i = 0 ;i < n ; i++){
-                if(arr[i] == 1){
-                    result += solve(arr , i , 0);
-                }
-            } 
-            System.out.println(result) ;        
+            // int result = 0 ; 
+            // for(int i = 0 ;i < n ; i++){
+            //     if(arr[i] == 1){
+            //         result += solve(arr , i , 0);
+            //     }
+            // } 
+            // System.out.println(result) ;      
+            solveI(arr, n);  
         }
         sc.close();
+    }
+    public static void solveI(int[] arr , int n ){
+        int[] suffCount = new int[n];
+        for(int i = n-1 ; i >= 0 ; i--){
+            if(arr[i] == 3){
+                //we start a suffCOunt
+                int count = 0 ; 
+                int prev = 0 ;
+
+                for(int j = i ; j >= 0 ; j--){
+                    if(arr[j] == 2){
+                        count++; 
+                        prev += count ; 
+                        suffCount[j] += prev ;
+                    }
+                }
+
+            }
+        }
+        int prev = 0 ; 
+        for(int i = n-1 ; i >= 0 ; i--){
+            if(suffCount[i] != 0){
+                prev = suffCount[i];
+            }else{
+                suffCount[i] = prev ; 
+            }
+        }
+
+        int result = 0 ; 
+        for(int i = 0 ;i < n-1 ; i++){
+            if(arr[i] == 1){
+                result += suffCount[i+1];
+            }
+        }
+        System.out.println(result);
+        return ; 
     }
     public static int solve(int[] arr , int idx , int count){
         if(idx == arr.length){
