@@ -15,6 +15,9 @@ public class Day145 {
             }
             if(nums[n-1] != 0) result[idx++] = nums[n-1];
             System.out.println("Helli");
+            System.out.println("Helli");
+            System.out.println("Helli");
+            System.out.println("Helli");
             return result; 
         }
     }
