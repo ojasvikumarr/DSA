@@ -25,7 +25,7 @@ public class Day152 {
                 primes.add(i);
             }
         }
-        
+        System.out.println("hello");
         if (primes.size() < 2) {
             return new int[]{-1, -1};
         }
