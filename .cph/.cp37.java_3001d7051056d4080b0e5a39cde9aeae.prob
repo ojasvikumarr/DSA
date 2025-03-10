@@ -1,0 +1,1 @@
+{"name":"Local: cp37","url":"/Users/ojasvikumar/Coding/Java/cp37.java","tests":[{"id":1741613611948,"input":"6\n3\n1 2 3\n5\n1 3 2 5 4\n5\n5 4 3 2 1\n3\n3 1 2\n4\n2 3 1 4\n5\n5 1 2 3 4\n","output":"YES\nYES\nNO\nNO\nNO\nNO\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/cp37.java","group":"local","local":true}
