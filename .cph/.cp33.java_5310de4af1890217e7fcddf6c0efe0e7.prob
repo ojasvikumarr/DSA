@@ -1,0 +1,1 @@
+{"name":"Local: cp33","url":"/Users/ojasvikumar/Coding/Java/cp33.java","tests":[{"id":1741610141620,"input":"5\n3 2\n1 2 3\n3 1\n9 9 9\n4 4\n6 4 2 1\n4 3\n10 3 830 14\n2 1\n3 1\n","output":"YES\nYES\nYES\nYES\nNO\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/cp33.java","group":"local","local":true}
