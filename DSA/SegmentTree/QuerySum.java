@@ -1,7 +1,7 @@
 package SegmentTree;
 import java.util.* ; 
 
-public class intro {
+public class QuerySum {
     //{ Driver Code Starts
 //Initial Template for Java
 // } Driver Code Ends
