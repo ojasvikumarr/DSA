@@ -1,9 +1,7 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
-
-class CodeChef
-{
+package CodeChef;
+import java.util.* ; 
+public class FlipOrReverse {
+   
 	public static void main (String[] args) throws java.lang.Exception
 	{
 		// your code goes here
@@ -38,3 +36,4 @@ class CodeChef
 		sc.close();
 	}
 }
+
