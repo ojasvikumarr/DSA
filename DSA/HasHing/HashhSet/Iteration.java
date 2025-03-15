@@ -12,7 +12,7 @@ public class Iteration {
         cities.add("Banglore");
         cities.add("Chennai");
         @SuppressWarnings("checked")
-        Iterator it = cities.iterator();
+        Iterator<String> it = cities.iterator();
         while(it.hasNext()){
             System.out.println(it.next());
         }

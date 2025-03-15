@@ -1,4 +1,4 @@
-// package HasHing.HashMap;
+package HasHing.HashMap;
 import java.util.* ;
 public class MajorityElement {
     public static void main(String args[]){

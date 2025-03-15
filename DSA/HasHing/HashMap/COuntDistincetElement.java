@@ -3,6 +3,7 @@ package HasHing.HashMap;
 import java.util.* ;
 
 public class COuntDistincetElement {
+    @SuppressWarnings("unused")
     public static int DistinctElement(int arr[]){
         HashMap<Integer , Integer> map = new HashMap<>();
         for(Integer a : arr){

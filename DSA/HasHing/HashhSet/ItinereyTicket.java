@@ -15,6 +15,7 @@ public class ItinereyTicket {
         }
         return null ;
     }
+    @SuppressWarnings("unused")
 public static void main (String args []) {
     HashMap<String, String> tickets = new HashMap<> ();  
     tickets. put ( "Chennai", "Bengaluru");
