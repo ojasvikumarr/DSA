@@ -1,0 +1,1 @@
+{"name":"Local: cp50","url":"/Users/ojasvikumar/Coding/Java/cp50.java","tests":[{"id":1742222775325,"input":"8\n39 7\n9 3\n6 3\n999967802 3\n5 5\n6 5\n999999999 3\n1000000000 3\n","output":"7\n4\n3\n499983901\n1\n2\n499999999\n500000000\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/cp50.java","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: cp52","url":"/Users/ojasvikumar/Coding/Java/cp52.java","tests":[{"id":1742231753834,"input":"3\n3 1\n1 2 3\n5 2\n4 2 3 1 3\n4 3\n2 2 2 2\n","output":"5\n10\n8\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/cp52.java","group":"local","local":true}
