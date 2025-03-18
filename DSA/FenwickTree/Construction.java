@@ -33,6 +33,8 @@ public class Construction {
         System.out.println(sum);
         return ; 
     }
+
+    
     public static void main(String[] args){
         int[] arr = {1 , 2 , 3 , 4, 5};
         solve(arr);

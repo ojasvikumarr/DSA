@@ -1,0 +1,1 @@
+{"name":"Local: cp53","url":"/Users/ojasvikumar/Coding/Java/cp53.java","tests":[{"id":1742301417480,"input":"3\n5 2\n2 4\n5 2\n3 4\n12 3\n5 9 8\n","output":"4\n6\n22\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/cp53.java","group":"local","local":true}
