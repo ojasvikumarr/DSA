@@ -13,6 +13,23 @@ public class NinjaTraining {
         // return solve(arr , arr.length-1 , 3);
         return tabulation(arr);
     }
+    public int spaceOptimized(int[][] arr){
+        int[] prev = new int[3];
+        int[] curr = new int[3];
+        int n = arr.length;
+        for(int i = 1 ; i <= n ; i++){
+            for(int j = 0 ; j < 3 ; j++){
+                int maxi = Integer.MIN_VALUE ; 
+                for(int k = 0 ; k < 3 ; k++){
+                    if(j == k) continue ;
+                    maxi = Math.max(maxi , prev[k] + arr[i-1][k]);
+                }
+                curr[j] = maxi ;
+            }
+            prev = Arrays.copyOf(curr , 3);
+        } 
+        return Math.max(prev[0] , Math.max(prev[1] , prev[2]));
+    }
     public int tabulation(int[][] arr){
         int n = arr.length ; 
         int[][] tab = new int[n+1][3];
