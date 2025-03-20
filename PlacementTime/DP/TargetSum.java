@@ -1,5 +1,6 @@
-package PlacementTime.DP;
 
+package PlacementTime.DP;
+import java.util.* ; 
 import java.util.Arrays;
 
 public class TargetSum {
@@ -70,6 +71,19 @@ public class TargetSum {
             }
         }
         return tab[sum];
+    }
+    public static boolean targetSumNeg(int[] arr , int sum){
+        Set<Integer> dp = new HashSet<>();
+        dp.add(0);// as sum of 0 is always accepted 
+        for(int num : arr){
+            Set<Integer> newDp = new HashSet<>(dp);
+            for(int ele : dp){
+                newDp.add(ele +num);
+            }
+            dp = newDp ; 
+        }
+        return dp.contains(sum);
+
     }
 }
 }
