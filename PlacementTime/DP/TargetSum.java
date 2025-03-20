@@ -59,5 +59,17 @@ public class TargetSum {
         memo[idx][sum] = (result ? 1 : 0);
         return result ; 
     }
+    public static boolean targetSum(int arr[] , int sum){
+        boolean[] tab = new boolean[sum+1];
+        tab[0] = true ; 
+        int n = arr.length ; 
+        for(int i = 0 ; i < n ; i++){
+            for(int target = sum ; target >= arr[i]; target--){
+                // if(target - arr[i] >= 0)
+                tab[target] |= tab[target-arr[i]];
+            }
+        }
+        return tab[sum];
+    }
 }
 }
