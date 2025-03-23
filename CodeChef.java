@@ -5,58 +5,52 @@ import java.lang.StringBuilder;
 
 class Codechef
 {
-	public static void main (String[] args) throws java.lang.Exception
-	{
-		// your code goes here
-		Scanner sc = new Scanner(System.in);
-		    int t = sc.nextInt();
-		    while(t-- > 0){
-		        int n = sc.nextInt();
-		        List<Integer> a = new ArrayList<>();
-		        for(int i = 0 ; i < n ; i++){
-		            a.add(sc.nextInt());
-		        }
-		        StringBuilder ans = new StringBuilder();
-		        if(n < 40){
-		            for(int i = 0 ; i < n ; i++){
-		                List<Integer> b = new ArrayList<>(a);
-		                b.remove(i);
-		                ans.append(check(b));
-		            }
-		        }else{
-		            ans.append("0".repeat(n));
-		        }
-				System.out.println(ans);
-		    }
-		sc.close();
-	}
-	public static String check(List<Integer> a){
-	    if(a.size() == 1) return "1";
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while(t-- > 0){
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            for(int i = 0 ; i < n ; i++) arr[i] = sc.nextInt();
+            int k = sc.nextInt();
+            System.out.println(solve(arr , n , k));
+        }
+        sc.close();
+    }
 
-	    List<Integer> diff = new ArrayList<>();
-	    for(int i = 0 ; i < a.size()-1 ; i++){
-			int dif = a.get(i+1) - a.get(i);
-			if(dif <= 0) return "0";
-			diff.add(dif);
-		}
+    static HashMap<String, Integer> memoMap; 
 
-	    return check(diff);
+    static long solve(int[] a, int n, int k) {
+        memoMap = new HashMap<>();  // Use HashMap for memoization
+        return solveII(a, k, n-1, -1);
+    }
 
-	}
-	public static String solveII(List<Integer> a){
-		while(a.size() > 1){
-			List<Integer> diff = new ArrayList<>(); 
-			for(int i = 1 ; i < a.size() ; i++){
-				diff.add(a.get(i) - a.get(i-1));
-			}
-			for(int i = 1 ; i < diff.size() ; i++){
-				if(diff.get(i-1) >= diff.get(i)){
-					return "0";
-				}
-			}
-			a = diff ; 
-		}
-		return "1";
-	}
-	
+    static int solveII(int[] arr, int k, int idx, int prev) {
+        if (idx < 0) {
+            return (k == 0) ? 0 : (int) 1e8;
+        }
+
+        if (k < 0) return (int) 1e8; 
+        
+        String key = idx + "," + k + "," + prev;
+        if (memoMap.containsKey(key)) {
+            return memoMap.get(key);
+        }
+
+        int pick = Integer.MAX_VALUE;
+        if (k > 0) { // Ensure k does not go negative
+            if (prev == -1) { 
+                pick = solveII(arr, k-1, idx-1, idx);
+            } else {
+                pick = Math.abs(arr[idx] - arr[prev]) + solveII(arr, k-1, idx-1, idx);
+            }
+        }
+
+        int notpick = solveII(arr, k, idx-1, prev);
+
+        int result = Math.min(pick, notpick);
+        memoMap.put(key, result); // Store result in HashMap
+
+        return result;
+    }
 }
