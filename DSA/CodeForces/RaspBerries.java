@@ -1,7 +1,9 @@
+package CodeForces;
+
 import java.util.Scanner;
 
-public class cp55 {
-    public static void main(String args[]){
+public class RaspBerries {
+     public static void main(String args[]){
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
         while(t-- > 0){
