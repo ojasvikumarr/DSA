@@ -1,4 +1,3 @@
-import java.util.Scanner;
 import java.util.Arrays ;
 import java.util.* ; 
 public class cp55 {
@@ -6,48 +5,41 @@ public class cp55 {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
         while(t-- > 0){
-            int n = sc.nextInt();
-            long[] arr = new long[n];
-            for(int i = 0 ; i < n ; i++) arr[i] = sc.nextLong();
-            solve(arr , n);
+            long n = sc.nextLong();
+            long m = sc.nextLong();
+            long k = sc.nextLong();
+            solve(n, m, k);
         }
         sc.close();
     }
-    public static void solve(long[] A , int n){
-        long[] arr = Arrays.copyOf(A , n);
-        Map<Long , Long> res = new HashMap<>();
-        Arrays.sort(arr);
-        long[] preSum = new long[n+1];
-        for(int i = 0 ; i < n ; i++){
-            preSum[i+1] = arr[i] + preSum[i];
-        }
-        for(int i = 1 ; i <= n ; i++){
-            long no = i-1 ; 
-            //we need to add the remain
-            long target = preSum[i];
-            //we need to find this in the remaining ortiong 
-            int l = i-1 ; 
-            int r = n-1 ; 
-            int idx = 0 ; 
-            while(l <= r){
-                int mid = l + (r-l)/2 ; 
-                if(arr[mid] <= target){
-                    idx = mid+1 ; 
-                    target = preSum[mid+1];
-                    l = mid + 1; 
-                }else{
-                    r = mid - 1; 
-                }
-            }
-            // System.out.print(idx + " ");
-            no += (idx-i);
-            res.put(arr[i-1] , no);
-        }
-        // System.out.println();
-        for(Long ele : A){
-            System.out.print(res.get(ele)+" ");
-        }
-        System.out.println();
-    }
     
+    public static void solve(long n , long m , long x ){
+        long cols = (long)Math.ceil((double)x/n);
+        long l = 1 ; 
+        long r = cols ; 
+        long res = 0 ; 
+        while(l <= r){
+            long mid = l+(r-l)/2 ; 
+            if(isPossible(cols , mid , m)){
+                res = mid ; 
+                // System.out.println(res);
+                r = mid-1 ; 
+            }else{
+                l = mid+1 ;
+            }
+        }
+        // if(cols%2 == 0){
+            System.out.println(res);
+        // }else{
+        //     System.out.println(res-1);
+        // }
+        
+        return ; 
+    }
+    public static boolean isPossible(long cols , long mid , long m){
+        // System.out.println(cols + " " + mid + " " + m + ' ');
+        long rem = ((long)Math.ceil((double)cols/mid))*(mid+1) ;
+        // System.out.println(rem);
+        return  rem <= m+1; 
+    }
 }
