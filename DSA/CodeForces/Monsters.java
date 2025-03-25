@@ -1,7 +1,11 @@
+package CodeForces;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Scanner;
-import java.util.Arrays ;
-import java.util.* ; 
-public class cp55 {
+
+public class Monsters {
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
@@ -41,5 +45,4 @@ public class cp55 {
         
         sc.close();
     }
-    
 }
