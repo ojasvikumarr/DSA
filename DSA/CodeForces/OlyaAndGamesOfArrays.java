@@ -1,7 +1,11 @@
+package CodeForces;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Arrays ;
-import java.util.* ; 
-public class cp55 {
+
+public class OlyaAndGamesOfArrays {
     public static void main(String args[]){
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
@@ -33,5 +37,4 @@ public class cp55 {
         }
         sc.close();
     }
-    
 }
