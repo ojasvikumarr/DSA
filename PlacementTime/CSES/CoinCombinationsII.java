@@ -24,15 +24,15 @@ public class CoinCombinationsII {
         // int[][] dp = new int[n+1][sum+1] ;
         int[] prev = new int[sum+1];
         int[] curr = new int[sum+1];
-        prev[0] = 1; 
+        curr[0] = 1; 
 
 
         for(int i = n-1 ; i >= 0 ; i--){
-            for(int j = 0 ; j <= sum ; j++){
+            for(int j = 1 ; j <= sum ; j++){
                 int skip = prev[j];
                 int pick = 0 ; 
                 if(arr[i] <= j){
-                    pick = prev[j-arr[i]];
+                    pick = curr[j-arr[i]];
                 }
                 curr[j] =( skip + pick )%MOD; 
             }
