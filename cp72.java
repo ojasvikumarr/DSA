@@ -4,12 +4,19 @@ public class cp72 {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
         while(t-- > 0){
-            long x = sc.nextInt();
-            long y = sc.nextInt();
-            long k = sc.nextInt();
-
-            long ans =((y*k+k-1 + x - 2)/(x-1)) + k;
-            System.out.println(ans);
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            Set<Integer> set = new HashSet<>();
+            for(int i =0 ; i < n ; i++){
+                arr[i] = sc.nextInt();
+                set.add(arr[i]);
+            }
+            if(set.size() == n){
+                System.out.println("No");
+            }else{
+                System.out.println("Yes");
+            }
+            
         }
         sc.close();
     }
