@@ -1,5 +1,8 @@
-import java.util.* ; 
-public class cp74 {
+package CodeForces;
+
+import java.util.Scanner;
+
+public class DIffDivisior {
     public static void main(String[]args){
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
