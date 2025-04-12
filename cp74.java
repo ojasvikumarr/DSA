@@ -4,23 +4,15 @@ public class cp74 {
         Scanner sc = new Scanner(System.in);
         int t = sc.nextInt();
         while(t--  >0){
-            String a = sc.next();
-            String b = sc.next();
-
-            int n = a.length();
-            int m = b.length();
-            int maxi = 0 ; 
-            int[][] dp = new int[n+1][m+1]  ;
-            for(int i = 1 ; i <= n ; i++){
-                for(int j = 1 ; j <= m ; j++){
-                    if(a.charAt(i-1) == b.charAt(j-1)){
-                        dp[i][j] = dp[i-1][j-1]+ 1  ;
-                    }
-                    maxi = Math.max(maxi , dp[i][j]);
-                }
+            int a = sc.nextInt();
+            int b = sc.nextInt();
+            int xor = 0 ; 
+            for(int i = 0 ; i < a ; i++){
+                xor ^= i ; 
             }
-
-            System.out.println(n+m-2*maxi);
+            if(xor == 0 && b < a){
+                System.out.println(a+2);
+            }else 
         }
         sc.close();
     }
