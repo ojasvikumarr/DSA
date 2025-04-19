@@ -53,7 +53,7 @@ public class DistrictConnection {
                 System.out.println(1 + " " + (i+1));
             }
         }
-
+        int ele2 = arr[0] ;
         int idx = -1 ;
         for(int i = 1 ; i < n ; i++){
             if(arr[i] != ele){
