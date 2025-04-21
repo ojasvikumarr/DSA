@@ -27,11 +27,11 @@ public class cp77 {
                 if(s.charAt(i) == 'P'){
                     int jumps = (n-i-cnt-1) ;
                     right += (jumps+1)/2 ;
-                    System.out.println(right);
+                    // System.out.println(right);
                     cnt++ ; 
                 }
             }
-            System.out.println(left + " --  " + right);
+            // System.out.println(left + " --  " + right);
             sb.append(Math.min(left , right));
             sb.append("\n");
         }
