@@ -1,0 +1,1 @@
+{"name":"Local: cp85","url":"/Users/ojasvikumar/Coding/Java/cp85.java","tests":[{"id":1746329592133,"input":"2\n4\n3 -4 5\n11\n-30 12 -57 7 0 -81 -68 41 -89 0\n","output":"-4\n265\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/cp85.java","group":"local","local":true}
