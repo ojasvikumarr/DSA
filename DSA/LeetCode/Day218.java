@@ -24,6 +24,7 @@ public class Day218 {
                 ans = (ans + cnt[i]) % MOD;
             }
             return ans;
+            // return ans;
         }
     }
 }
