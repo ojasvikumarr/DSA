@@ -29,6 +29,7 @@ public class Day221 {
             //hello 
             dp[i] = bestLen;
             prev[i] = bestPrev;
+            //hello 
             if (dp[i] > maxLen) {
                 maxLen = dp[i];
                 endIndex = i;
