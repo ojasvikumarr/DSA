@@ -13,16 +13,14 @@ public class Day229 {
     private long maxSumOfNodes(int index, int isEven, int[] nums, int k,
             long[][] memo) {
         if (index == nums.length) {
-            // If the operation is performed on an odd number of elements return
-            // INT_MIN
             return isEven == 1 ? 0 : Integer.MIN_VALUE;
         }
         if (memo[index][isEven] != -1) {
             return memo[index][isEven];
         }
-        // No operation performed on the element
+
         long noXorDone = nums[index] + maxSumOfNodes(index + 1, isEven, nums, k, memo);
-        // XOR operation is performed on the element
+
         long xorDone = (nums[index] ^ k) +
                 maxSumOfNodes(index + 1, isEven ^ 1, nums, k, memo);
 
