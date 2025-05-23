@@ -26,7 +26,7 @@ public class Day229 {
         long xorDone = (nums[index] ^ k) +
                 maxSumOfNodes(index + 1, isEven ^ 1, nums, k, memo);
 
-        // Memoize and return the result
+
         return memo[index][isEven] = Math.max(xorDone, noXorDone);
     }
 }
