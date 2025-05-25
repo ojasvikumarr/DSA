@@ -7,12 +7,23 @@ public class cp85 {
         StringBuilder sb = new StringBuilder();
         int t = sc.nextInt();
         while(t-- > 0){
-            int n = sc.nextInt();
-            long res = 0 ; 
-            for(int i = 0 ; i < n-1 ; i++){
-                res += sc.nextInt();
+            int counter = 0 ; 
+            for(int i = 0 ; i < 10 ; i++){
+                int cnt = 0 ; 
+                for(int j = 0 ; j < 10; j++){
+                    if(j < 5 && cnt < counter ){
+                        cnt++ ; 
+                    }else if(j >= 5 && cnt >= counter){
+                        cnt-- ;
+                    }
+                    char c = sc.next().charAt(0);
+                    if(c == 'X'){
+
+                    }
+                }
+                if(i < 5) counter++ ;
+                else counter-- ; 
             }
-            sb.append(-res + "\n");
         }
         System.out.println(sb.toString());
         sc.close();
