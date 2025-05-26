@@ -10,23 +10,20 @@ public class cp86 {
         int t = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
         while(t-- > 0){
+            int n = Integer.parseInt(br.readLine());
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            int c = Integer.parseInt(st.nextToken());
-
-            if(c % 2 == 0){
-                if(a <= b){
-                    sb.append("Second");
-                }else{
-                    sb.append("First");
-                }
+            int[] arr = new int[n];
+            for(int i = 0 ; i < n ; i++){
+                arr[i] = Integer.parseInt(st.nextToken());
+            }
+            int diff = Integer.MAX_VALUE ; 
+            for(int i = 1; i < n ; i++){
+                diff = Math.min(diff , arr[i] - arr[i-1]);
+            }
+            if(diff < 0){
+                sb.append(0);
             }else{
-                if((a+1) <= b){
-                    sb.append("Second");
-                }else{
-                    sb.append("First");
-                }
+                sb.append((diff/2) + 1);
             }
             sb.append("\n");
         }
