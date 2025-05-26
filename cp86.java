@@ -10,34 +10,25 @@ public class cp86 {
         int t = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
         while(t-- > 0){
-            int n = Integer.parseInt(br.readLine());
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int[] arr = new int[n];
-            int mini = Integer.MAX_VALUE ; 
-            for(int i = 0 ; i < n ; i++){
-                arr[i] = Integer.parseInt(st.nextToken());
-                mini = Math.min(mini , arr[i]);
-            }
-            int f = 0 ; 
-            for(int i = 0 ;i < n; i++){
-                if(arr[i] == mini) f++ ; 
-            }
-            if(f == n){
-                sb.append(-1).append("\n");
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+
+            if(c % 2 == 0){
+                if(a <= b){
+                    sb.append("Second");
+                }else{
+                    sb.append("First");
+                }
             }else{
-                sb.append(f + " " + (n-f)).append("\n");
-                for(int i = 0 ; i < f ; i++){
-                    sb.append(mini + " ");
+                if((a+1) <= b){
+                    sb.append("Second");
+                }else{
+                    sb.append("First");
                 }
-                sb.append("\n");
-                for(int i = 0 ; i < n ; i++ ){
-                    if(arr[i] != mini){
-                        sb.append(arr[i] + " ");
-                    }
-                }
-                sb.append("\n");
-                
             }
+            sb.append("\n");
         }
         System.out.println(sb.toString());
    }
