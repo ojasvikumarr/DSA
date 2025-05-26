@@ -11,49 +11,17 @@ public class cp86 {
         StringBuilder sb = new StringBuilder();
         while(t-- > 0){
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int n = Integer.parseInt(st.nextToken());
-            int k = Integer.parseInt(st.nextToken());
             int x = Integer.parseInt(st.nextToken());
-
-
-            if(x != 1){
-                sb.append("YES\n");
-                sb.append(n + "\n");
-                for(int i = 0 ; i < n ;i++){
-                    sb.append(1 +" ");
-                }
+            int k = Integer.parseInt(st.nextToken());
+           
+            if(x%k != 0){
+                sb.append(1 + " \n");
+                sb.append(x);
             }else{
-                if(k == 2){
-                    if(n % 2 == 0){
-                        //then its good 
-                        sb.append("YES\n");
-                        sb.append(n/2 + "\n");
-                        for(int i = 0 ;i < n/2 ; i++){
-                            sb.append(2 + " ");
-                        }
-                    }else{
-                        sb.append("NO");
-                    }
-                }else if(k > 2){
-                    if(n%2 == 0){
-                        sb.append("YES\n");
-                        sb.append(n/2 + "\n");
-                        for(int i = 0 ;i < n/2 ; i++){
-                            sb.append(2 + " ");
-                        }
-                    }else{
-                        sb.append("YES\n");
-                        sb.append((n/2) + "\n");
-                        for(int i = 0 ;i < n/2-1 ; i++){
-                            sb.append(2 + " ");
-                        }
-                        sb.append(3 + " ");
-                    }
-                }else{
-                    sb.append("NO");
-                }
-
+                sb.append(2 + " \n");
+                sb.append((x-1) + " " + 1 + " ");
             }
+            
             sb.append("\n");
         }
         System.out.println(sb.toString());
