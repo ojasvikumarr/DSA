@@ -5,26 +5,23 @@ public class cp85 {
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
-        int t = sc.nextInt();
-        while(t-- > 0){
-            int counter = 0 ; 
-            for(int i = 0 ; i < 10 ; i++){
-                int cnt = 0 ; 
-                for(int j = 0 ; j < 10; j++){
-                    if(j < 5 && cnt < counter ){
-                        cnt++ ; 
-                    }else if(j >= 5 && cnt >= counter){
-                        cnt-- ;
-                    }
-                    char c = sc.next().charAt(0);
-                    if(c == 'X'){
-
-                    }
+            int maxi = Integer.MIN_VALUE ; 
+            int mini = Integer.MAX_VALUE;
+            int n = sc.nextInt();
+            for(int i = 0 ; i < n ; i ++){
+                int a = sc.nextInt();
+                if(a >= 0){
+                    mini = Math.min(mini , a);
+                }else{
+                    maxi = Math.max(maxi , a);
                 }
-                if(i < 5) counter++ ;
-                else counter-- ; 
             }
-        }
+            if(maxi == Integer.MIN_VALUE){
+                sb.append(mini);
+            }else{
+                sb.append(Math.min(-maxi , mini));
+            }
+            sb.append("\n");
         System.out.println(sb.toString());
         sc.close();
     }
