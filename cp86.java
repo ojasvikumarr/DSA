@@ -12,24 +12,32 @@ public class cp86 {
         while(t-- > 0){
             int n = Integer.parseInt(br.readLine());
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int[] b = new int[n];
-            for(int i = 0 ;i < n ; i++){
-                b[i] = Integer.parseInt(st.nextToken());
+            int[] arr = new int[n];
+            int mini = Integer.MAX_VALUE ; 
+            for(int i = 0 ; i < n ; i++){
+                arr[i] = Integer.parseInt(st.nextToken());
+                mini = Math.min(mini , arr[i]);
             }
-
-            List<Integer> res = new ArrayList<>();
-            res.add(b[0]);
-            for(int i = 1 ; i < n ; i++){
-                if(res.get(res.size() - 1) > b[i]){
-                    res.add(1);
+            int f = 0 ; 
+            for(int i = 0 ;i < n; i++){
+                if(arr[i] == mini) f++ ; 
+            }
+            if(f == n){
+                sb.append(-1).append("\n");
+            }else{
+                sb.append(f + " " + (n-f)).append("\n");
+                for(int i = 0 ; i < f ; i++){
+                    sb.append(mini + " ");
                 }
-                res.add(b[i]);
+                sb.append("\n");
+                for(int i = 0 ; i < n ; i++ ){
+                    if(arr[i] != mini){
+                        sb.append(arr[i] + " ");
+                    }
+                }
+                sb.append("\n");
+                
             }
-            sb.append(res.size() + "\n");
-            for(int ele : res){
-                sb.append(ele + " ");
-            }
-            sb.append("\n");
         }
         System.out.println(sb.toString());
    }
