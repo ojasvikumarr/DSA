@@ -10,20 +10,49 @@ public class cp86 {
         int t = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
         while(t-- > 0){
-            int n = Integer.parseInt(br.readLine());
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int[] arr = new int[n];
-            for(int i = 0 ; i < n ; i++){
-                arr[i] = Integer.parseInt(st.nextToken());
-            }
-            int diff = Integer.MAX_VALUE ; 
-            for(int i = 1; i < n ; i++){
-                diff = Math.min(diff , arr[i] - arr[i-1]);
-            }
-            if(diff < 0){
-                sb.append(0);
+            int n = Integer.parseInt(st.nextToken());
+            int k = Integer.parseInt(st.nextToken());
+            int x = Integer.parseInt(st.nextToken());
+
+
+            if(x != 1){
+                sb.append("YES\n");
+                sb.append(n + "\n");
+                for(int i = 0 ; i < n ;i++){
+                    sb.append(1 +" ");
+                }
             }else{
-                sb.append((diff/2) + 1);
+                if(k == 2){
+                    if(n % 2 == 0){
+                        //then its good 
+                        sb.append("YES\n");
+                        sb.append(n/2 + "\n");
+                        for(int i = 0 ;i < n/2 ; i++){
+                            sb.append(2 + " ");
+                        }
+                    }else{
+                        sb.append("NO");
+                    }
+                }else if(k > 2){
+                    if(n%2 == 0){
+                        sb.append("YES\n");
+                        sb.append(n/2 + "\n");
+                        for(int i = 0 ;i < n/2 ; i++){
+                            sb.append(2 + " ");
+                        }
+                    }else{
+                        sb.append("YES\n");
+                        sb.append((n/2) + "\n");
+                        for(int i = 0 ;i < n/2-1 ; i++){
+                            sb.append(2 + " ");
+                        }
+                        sb.append(3 + " ");
+                    }
+                }else{
+                    sb.append("NO");
+                }
+
             }
             sb.append("\n");
         }
