@@ -1,7 +1,7 @@
 import java.util.* ; 
 import java.io.* ; 
 import java.lang.StringBuilder ; 
-
+import java.util.Arrays ; 
 public class cp87 {
     public static void main(String[] args)throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -13,30 +13,30 @@ public class cp87 {
             int n = Integer.parseInt(br.readLine());
             StringTokenizer st = new StringTokenizer(br.readLine());
             int[] arr = new int[n];
-            int xor = 0 ;
-            boolean zero = false ; 
-            for(int i = 0 ;i < n; i++){
+            for(int i = 0 ; i < n ; i++){
                 arr[i] = Integer.parseInt(st.nextToken());
-                xor ^= arr[i];
-                if(arr[i] == 0) zero = true ; 
             }
-
-            // if((zero && n % 2 == 0 )||(!zero && n%2 != 0)){
-            if(n%2 != 0){
-                //this means its odd 
-                sb.append(xor);
-            }else{
-                //its really even
-                if(xor == 0){
-                    sb.append(0);
-                }else{
-                    sb.append(-1);
+            boolean flag = false ;
+            for(int i = 0 ; i < n ; i++){
+                for(int j = i+1 ; j < n ; j++){
+                    if(gcd(arr[i] , arr[j]) <= 2){
+                        flag = true ;
+                        break ; 
+                    }
                 }
             }
-            
+            if(flag){
+                sb.append("YES");
+            }else{
+                sb.append("NO");
+            }
             sb.append("\n");
         }
         System.out.println(sb.toString());
+   }
+   public static int gcd(int a , int b){
+       if(b == 0) return a ; 
+       return gcd(b , a%b);
    }
 }
 
