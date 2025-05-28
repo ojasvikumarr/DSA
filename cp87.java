@@ -11,26 +11,24 @@ public class cp87 {
         StringBuilder sb = new StringBuilder();
         while(t-- > 0){
             int n = Integer.parseInt(br.readLine());
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int[] arr = new int[n];
-            for(int i = 0 ; i < n ; i++){
-                arr[i] = Integer.parseInt(st.nextToken());
-            }
-            boolean flag = false ;
-            for(int i = 0 ; i < n ; i++){
-                for(int j = i+1 ; j < n ; j++){
-                    if(gcd(arr[i] , arr[j]) <= 2){
-                        flag = true ;
+            int val = 0 ; 
+            int mul = 1 ; 
+            while(mul <= n){
+                boolean flag = true ; 
+                for(int i = 1 ; i <= 9 ; i++){
+                    if(i*mul <= n){
+                        val++ ;
+                    }else{
+                        flag = false ;
                         break ; 
                     }
                 }
+                if(!flag) break ; 
+                mul *= 10 ; 
             }
-            if(flag){
-                sb.append("YES");
-            }else{
-                sb.append("NO");
-            }
+            sb.append(val);
             sb.append("\n");
+
         }
         System.out.println(sb.toString());
    }
