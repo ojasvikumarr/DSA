@@ -1,90 +1,54 @@
-import java.util.*;
-import java.lang.*;
-import java.io.*;
+import java.io.* ; 
+import java.util.* ; 
+import java.lang.StringBuilder; 
+class Codechef {
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int t = Integer.parseInt(br.readLine());
+        while(t-- > 0){
+            int n = Integer.parseInt(br.readLine());
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int[] arr = new int[n];
+            for(int i =0  ; i < n ; i++){
+                arr[i] = Integer.parseInt(st.nextToken());
+                arr[i] %= 3 ; 
+            }
+            int one = 0 ; 
+            int two = 0 ; 
 
-class Codechef
-{
-	public static void main (String[] args) throws java.lang.Exception
-	{
-		// your code goes here
-		Scanner sc = new Scanner(System.in);
-		    int t = sc.nextInt();
-		    while(t-- > 0){
-		        int n = sc.nextInt();
-		        PriorityQueue<Integer> pq = new PriorityQueue<>();
-                int[] arr = new int[n];
-                int maxi = 0 ; 
-		        for(int i = 0 ; i < n ; i++){
-                    arr[i] = sc.nextInt();
-                    maxi = Math.max(maxi , arr[i]);
-		        }
-                for(int ele : arr){
-                    pq.add(ele);
-                }
-                // while(!pq.isEmpty()){
-                //     System.out.print(pq.poll() + "_");
-                // }
-                // System.out.println(pq);
-                
-		        System.out.println(Math.min(solve(pq , n), maxi));
-		    }
-		sc.close();
-	}
-	public static int solve(PriorityQueue<Integer> pq , int n){
-	    
-	    int res = 0 ; 
-	    while(!pq.isEmpty()){
-	        int top = pq.poll();
-	        int count = 1 ; 
-            // System.out.println(pq.peek());
-            while(!pq.isEmpty() && pq.peek() == top){
-                count++ ;
-                pq.poll();
-            }
-            if(count >= top){
-                PriorityQueue<Integer> temp = new PriorityQueue<>();
-                    for(int ele : pq){
-                        // System.out.print(ele + " - ");
-                        temp.offer(Math.max(ele-top , 0 ));
+            boolean flag = false ; 
+            for(int i = 0 ; i < n; i++){
+                if(arr[i] == 0){
+                    flag = true ; 
+                    break ; 
+                }else if(arr[i] == 1){
+                    if(two > 0){
+                        flag = true ; 
+                        break ;
+                    }else{
+                        one++ ;
                     }
-                    pq = temp ; 
-	                res += top ; 
-            }else{
-                res += count ; 
+                }else if(arr[i] == 2){
+                    if(one > 0){
+                        flag = true ; 
+                        break ; 
+                    }else{
+                        two++ ;
+                    }
+                }else if(one >= 3 || two >= 3){
+                    flag = true ; 
+                    break ; 
+                }
             }
-	       // if(pq.peek() == top){
-	       //     count++ ; 
-	       //     pq.poll();
-        //         if(pq.isEmpty()){
-        //             if(count >= top){
-	       //             res += top ; 
-        //             }else{
-        //                 res += count ; 
-        //             }
-        //         }
-	       // }else{
-	       //     //its not equal 
-	       //     if(count >= top){
-        //             PriorityQueue<Integer> temp = new PriorityQueue<>();
-        //             for(int ele : pq){
-        //                 // System.out.print(ele + " - ");
-        //                 temp.offer(ele-top);
-        //             }
-        //             pq = temp ; 
-	       //         res += top ; 
-	       //     }else{
-	       //         res += count ; 
-	       //     }
-        //         top = pq.poll();
-        //         count = 1 ; 
-        //         if(pq.isEmpty()){
-        //             if(count >= top){
-	       //             res += top ; 
-        //             }else{
-        //                 res += count ; 
-        //             }
-        //         }
-	    }
-	    return res ;
-	}
+
+            if(flag){
+                sb.append("YES");
+            }else{
+                sb.append("NO");
+            }
+            sb.append("\n");
+        }
+        System.out.println(sb.toString());
+    }
 }
