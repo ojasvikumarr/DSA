@@ -2,7 +2,7 @@ package LeetCode;
 
 import java.util.Arrays;
 import java.util.Queue;
-
+import java.util.LinkedList ;
 public class Day236 {
     class Solution {
     public void bfs(int startNode, int[] edges, int[] dist) {
