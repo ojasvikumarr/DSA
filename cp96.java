@@ -9,24 +9,24 @@ public class cp96 {
         StringBuilder sb = new StringBuilder();
         int tc = Integer.parseInt(br.readLine());
         while(tc-- > 0){
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            long a = Long.parseLong(st.nextToken());
-            long b = Long.parseLong(st.nextToken());
-
-            long diff = Math.abs(a - b);
-            if(diff == 0){
-                sb.append(0 + " " + 0);
-                sb.append("\n");
-                continue;
+            long n = Long.parseLong(br.readLine());
+            int res = 0 ; 
+            while( n%6 == 0 || n%3 == 0){
+                if(n%6 == 0){
+                    n /= 6;
+                }else if(n%3 == 0){
+                    n *= 2;
+                }
+                res++;
+                if(n == 1) break ; 
             }
-            long moves = 0 ; 
-            long floor =(int) Math.floor((double)a/diff)*diff ; 
-            long ceil = (int)Math.ceil((double)a/diff)*diff ;
-            // System.out.println("floor = " + floor + " ceil = " + ceil);
-            moves = Math.min(Math.abs(a - floor) , Math.abs(ceil - a));
-            sb.append(diff + " " + moves);
+            if(n == 1){
+                sb.append(res);
+            }else{
+                sb.append(-1);
+            }
+
             sb.append("\n");
-        
         }
         System.out.println(sb.toString());
     }
