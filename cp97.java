@@ -9,28 +9,50 @@ public class cp97 {
         StringBuilder sb = new StringBuilder();
         int tc = Integer.parseInt(br.readLine());
         while(tc-- > 0){
-            int n = Integer.parseInt(br.readLine());
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int n = Integer.parseInt(st.nextToken());
+            char c = st.nextToken().charAt(0);
             String s = br.readLine();
-            int[] preMax = new int[n];
-            int[] sufMax = new int[n];
-            Set<Character> set = new HashSet<>();
-            for(int i = 0 ; i < n ; i++){
-                set.add(s.charAt(i));
-                preMax[i] = set.size();
+            List<Integer> indices = new ArrayList<>();
+            List<Integer> start = new ArrayList<>();
+
+            for(int i = 0; i < n; i++){
+                if(s.charAt(i) == 'g'){
+                    indices.add(i);
+                }else if(s.charAt(i) == c){
+                    start.add(i);
+                }
             }
-            set.clear();
-            for(int i = n-1 ; i >= 0 ; i--){
-                set.add(s.charAt(i));
-                sufMax[i] = set.size();
-            }
+
+
             int maxi = 0 ; 
-            for(int i = 1 ; i < n ; i++){
-                maxi = Math.max(maxi , preMax[i-1] + sufMax[i]);
+            for(int ele : start){
+                int index = solve(ele , indices);
+                int val = indices.get(index);
+                if(val < ele ){
+                    maxi = Math.max(maxi , n - ele + indices.get(0));
+                }else{
+                    maxi = Math.max(maxi , val - ele);
+                }
             }
             sb.append(maxi);
             sb.append("\n");
         }
         System.out.println(sb.toString());
         br.close();
+    }
+    public static int solve(int i ,List<Integer> indices){
+        int l = 0 ;
+        int r = indices.size()-1;
+        while(l < r){
+            // int mid = r + (l - r)/2 ; 
+            int mid = (r + l)/2 ;
+            if(indices.get(mid) >= i){
+                r = mid ; 
+            }else{
+                l = mid + 1; 
+            }
+        }
+        return r ; 
     }
 }
