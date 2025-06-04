@@ -7,48 +7,89 @@ class Codechef {
         StringBuilder sb = new StringBuilder();
         int t = Integer.parseInt(br.readLine());
         while(t-- > 0){
-            int n = Integer.parseInt(br.readLine());
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int[] arr = new int[n];
-            for(int i =0  ; i < n ; i++){
-                arr[i] = Integer.parseInt(st.nextToken());
-                arr[i] %= 3 ; 
+            int n = Integer.parseInt(st.nextToken());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            int c = Integer.parseInt(st.nextToken());
+            int d = Integer.parseInt(st.nextToken());
+            int val1 = n*a ;
+            int val2 = n*b ; 
+            int val = 0 ; 
+            if(n == 1){
+                val = Math.max(a , b);
+                sb.append(val);
+            sb.append("\n");
+                continue ;
             }
-            int one = 0 ; 
-            int two = 0 ; 
+            if(n%2 == 0){
+                //even a and b will be same 
+                int zero = 0 ; 
+                int one = 0 ; 
+                int C = 0 ; 
+                int D = 0 ; 
 
-            boolean flag = false ; 
-            for(int i = 0 ; i < n; i++){
-                if(arr[i] == 0){
-                    flag = true ; 
-                    break ; 
-                }else if(arr[i] == 1){
-                    if(two > 0){
-                        flag = true ; 
-                        break ;
+                for(int i = 0 ; i < n ;i++){
+                    if(i%2 == 0){
+                        //its a zero 
+                        zero++ ;
+                        D += one ;
                     }else{
-                        one++ ;
+                        one++ ; 
+                        C += zero ; 
                     }
-                }else if(arr[i] == 2){
-                    if(one > 0){
-                        flag = true ; 
-                        break ; 
-                    }else{
-                        two++ ;
-                    }
-                }else if(one >= 3 || two >= 3){
-                    flag = true ; 
-                    break ; 
                 }
-            }
-
-            if(flag){
-                sb.append("YES");
+                // System.out.println("Zero : " + zero + " One : " + one + " C : " + C + " D : " + D);
+                // System.out.println("A : " + a + " B : " + b + " C : " + c + " D : " + d);
+                val = a*(n/2) + b*(n/2) + Math.max(c , d)*C + Math.min(c , d)*D;
+                int val3 = (a+b)*(n/2) + (Math.max(c , d)*(n*n)/4) + 0 ;
+                val = Math.max(val , val3);
             }else{
-                sb.append("NO");
+                //odd a and b will be different
+                int zero = 0 ; 
+                int one = 0 ; 
+                int C = 0 ; 
+                int D = 0 ; 
+
+                for(int i = 0 ; i < n ;i++){
+                    if(i%2 == 0){
+                        //its a zero 
+                        zero++ ;
+                        D += one ;
+                    }else{
+                        one++ ; 
+                        C += zero ; 
+                    }
+                }
+                // System.out.println("Zero : " + zero + " One : " + one + " C : " + C + " D : " + D);
+                val = Math.max(a , b)*((n/2 )+ 1) + Math.min(a , b)*(n/2) + Math.max(c , d)*C + Math.min(c , d)*D;
+                int val3 = (a+b)*(n/2) + (Math.max(c , d)*(((n*n)/4))) + 0 ;
+                // System.out.println(val3);
+                // if(d*(n/2) + b > c*(n/2) + a){
+                    //     val3 += d*(n/2) + b ;
+                    // }else{
+                        //     val3 += c*(n/2) + a ;
+                        // }
+                        if(a > b){
+                            val3 += a ;
+                        }else {
+                            val3 += b ;
+                        }
+                        val = Math.max(val , val3);
             }
+            val = Math.max(val , Math.max(val1 , val2));
+            
+            sb.append(val);
             sb.append("\n");
         }
         System.out.println(sb.toString());
+    }
+    static class Pair{
+        int val ;
+        int cost ; 
+        public Pair(int val, int cost){
+            this.val = val;
+            this.cost = cost;
+        }
     }
 }

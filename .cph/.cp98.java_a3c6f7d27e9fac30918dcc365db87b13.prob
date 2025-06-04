@@ -1,0 +1,1 @@
+{"name":"Local: cp98","url":"/Users/ojasvikumar/Coding/Java/cp98.java","tests":[{"id":1749044733787,"input":"6 180\n90 80 70 60 50 100\n","output":"2\n"},{"id":1749044844016,"input":"2 4 \n1 2","output":""}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/cp98.java","group":"local","local":true}
