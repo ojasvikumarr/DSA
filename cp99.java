@@ -1,6 +1,7 @@
 import java.util.* ; 
 import java.io.* ; 
 import java.lang.StringBuilder ; 
+import java.util.Arrays ; 
 
 public class cp99 {
     public static void main(String[] args) throws IOException {
@@ -8,47 +9,42 @@ public class cp99 {
         StringBuilder sb = new StringBuilder();
         int tc = Integer.parseInt(br.readLine());
         while (tc-- > 0) {
+            int n = Integer.parseInt(br.readLine());
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            
-            int xor = 0 ; 
-            // for(int i = 0 ; i < a ; i++){
-            //     xor ^= i ; 
-            // }
-            // int rem = (a-1)%4 ; 
-            // if(rem == 0){
-            //     xor = a ;
-            // }else if(rem == 1){
-            //     xor = 1 ; 
-            // }else if(rem == 2){
-            //     xor = a + 1 ;
-            // }else{
-            //     xor = 0 ;
-            // }
-            if(a% 4 == 1){
-                xor = a-1 ; 
-            }else if(a % 4 == 2){
-                xor = 1 ;
-            }else if(a % 4 == 3){
-                xor = a ;
-            }else{
-                xor = 0 ; 
+            int[] arr = new int[n];
+            Map<Integer , Integer> map = new HashMap<>();
+            int[] temp = new int[n];
+            for (int i = 0; i < n; i++) {
+                arr[i] = Integer.parseInt(st.nextToken());
+                map.put(arr[i] , i);
+                temp[i] = arr[i];
             }
-            // if(xor == b && xor != a){
-            //     sb.append(a);
-            // }else if(b <= a && b != 0){
-            //     sb.append(( a+2));
-            // }else{
-            //     sb.append((a+1));
-            // }
-            // System.out.println(xor);
-            if(xor == b){
-                sb.append(+ a);
-            }else if((xor^b) != a || xor == b){
-                sb.append((a+1));
-            }else{
-                sb.append((a+2));
+            Arrays.sort(arr);
+            long[] preSum = new long[n];
+            preSum[0] = arr[0];
+            for(int i = 1 ; i < n ; i++){
+                preSum[i] = preSum[i-1] + (long)arr[i];
+            }
+
+            int[] res = new int[n];
+            res[n-1] = n-1; 
+            Map<Integer, Integer> mp = new HashMap<>();
+            mp.put(arr[n-1] , n-1);
+            for(int i = n-2 ; i >= 0 ; i--){
+                if(preSum[i] >= arr[i+1]){
+                    res[i] = res[i+1];
+                }else{
+                    res[i] = i ;
+                }
+                mp.put(arr[i] , res[i]);
+            }
+
+            int[] ans = new int[n];
+            for(int i = 0 ; i < n; i++){
+                ans[i] = mp.get(temp[i]);
+            }
+            for(int ele : ans){
+                sb.append(ele + " ");
             }
             sb.append("\n");
         }

@@ -1,6 +1,7 @@
 package MathConcepts;
 import java.util.Arrays ;
 public class SeiveOfEratothenes {
+    //O(N*loglogn)
     public static void seive (int n){
         //i need too tell the number of prime number from 1 to n 
         //i have an array 
@@ -42,7 +43,7 @@ public class SeiveOfEratothenes {
     //     return true ; 
     // }
     public static void main(String args[]){
-        seive((int)1e5);
+        seive((int)(2*1e5));
         // seive(1);
     }
 }
