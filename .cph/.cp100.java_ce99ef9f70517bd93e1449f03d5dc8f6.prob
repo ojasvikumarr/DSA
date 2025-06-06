@@ -1,0 +1,1 @@
+{"name":"Local: cp100","url":"/Users/ojasvikumar/Coding/Java/cp100.java","tests":[{"id":1749206902966,"input":"4\n2\n3\n50\n1000000000\n","output":"14154\n44484\n171010650\n999589541\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/Users/ojasvikumar/Coding/Java/cp100.java","group":"local","local":true}
