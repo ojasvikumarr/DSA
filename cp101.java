@@ -6,34 +6,29 @@ public class cp101 {
     public static void main(String[] args)throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        int tc = Integer.parseInt(br.readLine());
-        while(tc-- > 0){
+        // int tc = Integer.parseInt(br.readLine());
+        // while(tc-- > 0){
             StringTokenizer st = new StringTokenizer(br.readLine());
             int n = Integer.parseInt(st.nextToken());
-            int l = Integer.parseInt(st.nextToken());
-            int r = Integer.parseInt(st.nextToken());
-
-            int[] arr = new int[n];
-            boolean flag = true ;
-            for(int i = 0 ; i < n ; i++){
-                arr[i] = (((l-1)/(i + 1))+ 1)*(i+1) ; 
-                if(arr[i] > r){
-                    flag = false ;
-                    break ; 
-                } 
+            int x = Integer.parseInt(st.nextToken());
+            st = new StringTokenizer(br.readLine());
+            int[] coins = new int[n];
+            for(int i =  0 ; i < n; i++){
+                coins[i] = Integer.parseInt(st.nextToken());
             }
-            if(flag == false){
-                sb.append("No");
-
-            }else{
-                sb.append("Yes");
-                sb.append("\n");
-                for(int ele : arr){
-                    sb.append(ele + " ");
+            int Mod = (int)1e9 + 7 ; 
+            int[] dp = new int[x+1];
+            dp[0] = 1 ; 
+            for(int i = 1 ; i <= x ; i++){
+                for(int j = 0 ; j < n ; j++){
+                    if(i >= coins[j]){
+                        dp[i] = (dp[i] + dp[i-coins[j]])%Mod;
+                    }
                 }
             }
+            sb.append(dp[x]);
             sb.append("\n");
-        }
+        // }
         System.out.println(sb.toString());
         br.close();
     }
