@@ -9,61 +9,30 @@ public class Main {
     public static void main(String[] args)throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        // int tc = Integer.parseInt(br.readLine());
-        // while(tc-- > 0){
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int n = Integer.parseInt(st.nextToken());
-            int l = Integer.parseInt(st.nextToken());
-            int[] arr = new int[n];
-            st = new StringTokenizer(br.readLine());
-            for(int i = 1 ;i < n; i++){
-                arr[i] = (Integer.parseInt(st.nextToken()) + arr[i-1])%l;
+        int tc = Integer.parseInt(br.readLine());
+        while(tc-- > 0){
+            int n = Integer.parseInt(br.readLine());
+            String s = br.readLine();
+            int i = 0 ; 
+            StringBuilder st = new StringBuilder();
+            while(i < n-1 && s.charAt(i) <= s.charAt(i+1)){
+                st.append(s.charAt(i));
+                i++ ; 
             }
-            for(int i = 0 ; i < n; i++){
-                arr[i] = arr[i]%l ;
+            int j = i ; 
+            i++ ; 
+            while(i < n && s.charAt(i) <= s.charAt(j)){
+                st.append(s.charAt(i));
+                i++ ; 
             }
-            Map<Integer , List<Integer>> map = new HashMap<>();
-            for(int i = 0 ; i < n ; i++){
-                int ele = arr[i];
-                // map.put(ele , map.getOrDefault(ele , 0)+1);
-                map.putIfAbsent(ele , new ArrayList<>());
-                map.get(ele).add(i);
+            st.append(s.charAt(j));
+            while(i < n){
+                st.append(s.charAt(i));
+                i++ ; 
             }
-            int dist = l/3 ; 
-            long res = 0 ; 
-            if(l % 3 != 0){
-                sb.append(0);
-                sb.append("\n");
-                System.out.println(sb.toString());
-                return ; 
-            }
-            // Set<Integer> set = new HashSet<>();
-            for(int key : map.keySet()){
-                int left = (key + dist )%l ; 
-                int right = (left + dist)%l ;
-                // if(map.containsKey(left) && map.containsKey(right) && !set.contains(left) && !set.contains(right)){
-                //     res += (long)map.get(key)*(long)map.get(left)*(long)map.get(right);
-                //     set.add(left);
-                //     set.add(right);
-                // }
-                if(left < key || right < key) continue ;
-                if(map.containsKey(left) && map.containsKey(right)){
-                    for(int ele : map.get(key)){
-                        for(int elee : map.get(left)){
-                            if(ele < elee){
-                                for(int eleee : map.get(right)){
-                                    if(elee < eleee){
-                                        res++  ;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            sb.append(res);
+            sb.append(st.toString());
             sb.append("\n");
-        // }
+        }
         System.out.println(sb.toString());
 
         br.close();

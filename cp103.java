@@ -52,12 +52,8 @@ public class cp103 {
                         break ; 
                     }
                     }
-                    // int idx = mapA.get(b[i]);
-                    // int diff = idx - i ; 
-                    // if(diff != 1){
-                    //     maxi = Math.max(maxi , i+1);
-                    // }
-                }else if(mapB.containsKey(a[i])){
+                }
+                if(mapB.containsKey(a[i])){
                     for(int idx : mapB.get(a[i])){
                         int diff = idx - i ; 
                         if(diff != 1){
@@ -65,11 +61,6 @@ public class cp103 {
                             break ; 
                         }
                     }
-                    // int idx = mapB.get(a[i]);
-                    // int diff = idx - i ; 
-                    // if(diff != 1){
-                    //     maxi = Math.max(maxi , i+1);
-                    // }
                 }
             }
             sb.append(maxi);
