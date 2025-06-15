@@ -1,18 +1,41 @@
 public class Day250{
-    class Solution {
+class Solution {
+    public long maximumProduct(int[] nums, int m) {
+        TreeMap<Long , Integer> left = new TreeMap<>();
+        TreeMap<Long , Integer> right = new TreeMap<>();
 
-    public int minMaxDifference(int num) {
-        String s = Integer.toString(num);
-        String t = s;
-        int pos = 0;
-        while (pos < s.length() && s.charAt(pos) == '9') {
-            pos++;
+        int gap = m - 1 ; 
+        left.put((long)nums[0] , 1);
+        int i = gap ; 
+        int n = nums.length ; 
+        for(; i < n ; i++){
+            right.put((long)nums[i], right.getOrDefault((long)nums[i] , 0)+1);
         }
-        if (pos < s.length()) {
-            s = s.replace(s.charAt(pos), '9');
+
+        i = 0 ; 
+        int j = gap ; 
+        long maxi = 0 ; 
+        for(; j < n ; j++ , i++){
+            left.put((long)nums[i] , left.getOrDefault((long)nums[i] , 0) + 1);
+            
+            long max1 = left.lastKey();
+            long max2 = right.lastKey();
+
+            long min1 = left.firstKey();
+            long min2 = right.firstKey();
+            
+            long posProd = max1*max2 ;
+            long negProd = min1*min2 ;
+            maxi = Math.max(maxi ,Math.max(posProd , negProd));
+
+            int freq = right.get((long)nums[j]);
+            if(freq == 1){
+                right.remove((long)nums[j]);
+            }else{
+                right.put((long)nums[j] , freq-1);
+            }
         }
-        t = t.replace(t.charAt(0), '0');
-        return Integer.parseInt(s) - Integer.parseInt(t);
+        return maxi ;
     }
-}
+}©leetcode
 }
