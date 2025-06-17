@@ -1,17 +1,7 @@
 class Day252{
     class Solution {
     int MOD = (int)(1e9 + 7); 
-    // public double nCr(int n , int r){
-    //     int num = 1 ; 
-    //     int den = 1 ; 
-    //     while(r > 0){
-    //         num = (num * n%MOD)%MOD ;
-    //         den = (den * r%MOD)%MOD ;
-    //         n-- ; 
-    //         r-- ;
-    //     }
-    //     return num/den ;
-    // }
+    
     public int countGoodArrays(int n, int m, int k) {
         //m(m-1)^b-1 * n-1Cb-1
         preComputeFactorials(n);
