@@ -7,7 +7,7 @@ class Day252{
         preComputeFactorials(n);
         int b = n-k ;
         long nCb = nCr(n-1 , b-1);
-        // double mmone = (m*(Math.pow(m-1 , b-1)%MOD))%MOD;
+
         long ans = modExp(m-1 , b-1 , MOD);
         ans = (ans * m) % MOD ;
         ans = (ans * nCb) % MOD ;
