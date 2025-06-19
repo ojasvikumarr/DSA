@@ -80,4 +80,66 @@ public class cp115{
         }
         return dp[idx][tight][repeated][bitmask] = res ;
     }
+    class Solution {
+    private int min_sum ; 
+    private int max_sum ;
+    private int MOD ; 
+    public int count(String num1, String num2, int min_sum, int max_sum) {
+        this.min_sum = min_sum ; 
+        this.max_sum = max_sum ; 
+        MOD = (int)1e9 + 7 ; 
+
+        String L = num1;
+        String R = num2;
+
+
+        dp = new int[L.length()+1][2][199];
+        for(int[][] mat : dp){
+            for(int[] row : mat){
+                Arrays.fill(row , -1);
+            }
+        }
+
+        int lowerRes = solve(L , 0 , 1 , 0)%MOD;
+
+        dp = new int[R.length()+1][2][199];
+        for(int[][] mat : dp){
+            for(int[] row : mat){
+                Arrays.fill(row , -1);
+            }
+        }
+
+        int upperRes = solve(R , 0 , 1 , 0)%MOD;
+
+        int sum = 0 ; 
+        for(char c : L.toCharArray()){
+            sum += c - '0';
+        }
+        if(sum >= min_sum && sum <= max_sum){
+            sum = 1 ;
+        }else{
+            sum = 0 ; 
+        }
+        return (upperRes - lowerRes + sum + MOD)%MOD ;
+    }
+    int[][][] dp ;
+    public int solve(String s, int idx , int tight , int sum ){
+        if(idx == s.length()){
+            if(sum >= min_sum && sum <= max_sum){
+                return 1 ;
+            }
+            return 0 ;
+        }
+        if(dp[idx][tight][sum] != -1){
+            return dp[idx][tight][sum] ;
+        }
+        int upperLimit = (tight == 1 ? s.charAt(idx) - '0' : 9);
+        int res = 0; 
+        for(int i = 0 ; i <= upperLimit ; i++){
+            int newTight = (tight == 1 && i == upperLimit ? 1 : 0);
+            res = (res + solve(s , idx+1 , newTight , sum + i))%MOD;
+        }
+        return dp[idx][tight][sum] = res%MOD ; 
+    }
+}
 }
