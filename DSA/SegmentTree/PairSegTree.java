@@ -6,8 +6,6 @@ public class PairSegTree{
     public static void main(String[] args)throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        // int tc = Integer.parseInt(br.readLine());
-        // while(tc-- > 0){
             StringTokenizer st = new StringTokenizer(br.readLine());
             int n = Integer.parseInt(st.nextToken());
             int q = Integer.parseInt(st.nextToken());
