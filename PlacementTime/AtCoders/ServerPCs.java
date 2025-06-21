@@ -5,7 +5,7 @@ import java.lang.StringBuilder ;
 import java.io.* ; 
 import java.util.Arrays ; 
 
-public class Main {
+public class ServerPCs {
     public static void main(String[] args)throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
