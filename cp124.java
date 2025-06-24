@@ -2,60 +2,32 @@ import java.util.* ;
 import java.io.* ; 
 import java.lang.StringBuilder ; 
 
-public class cp123{
+public class cp124{
     public static void main(String[] args)throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        int tc = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int tc = Integer.parseInt(st.nextToken());
+        int[] arr = new int[n];
+        st = new StringTokenizer(br.readLine());
+        for(int i = 0 ; i < n ; i++){
+            arr[i] = Integer.parseInt(st.nextToken());
+        }
         while(tc-- > 0){
-            int n = Integer.parseInt(br.readLine());
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int[] arr = new int[n];
-            int maxi = 0 ;
-            for(int i = 0 ; i < n ; i++){
-                arr[i] = Integer.parseInt(st.nextToken());
-                maxi = Math.max(maxi , arr[i]);
+            st = new StringTokenizer(br.readLine());
+            int type = Integer.parseInt(st.nextToken());
+            if(type == 1){
+                int l = Integer.parseInt(st.nextToken());
+                int r = Integer.parseInt(st.nextToken());
+                sb.append(rangeSumSq(0 ,l, r ,0 , n-1));
+                sb.append("\n");
+            }else{
+                int val = Integer.parseInt(st.nextToken());
+                int l = Integer.parseInt(st.nextToken());
+                int r = Integer.parseInt(st.nextToken());
+                rangeUpdate(arr , val ,0 , l , r , 0 , n-1);
             }
-
-            int i = 0 ; 
-            int j = n-1 ; 
-            int k = n-1 ;
-            long count = 0 ; 
-            // while(k >= 2){
-            //     i = 0 ; 
-            //     j = k-1 ;
-            //     while(i < j){
-            //         if(arr[k] != maxi && arr[i] + arr[j] + arr[k] <= maxi){
-            //             count += (j - i);
-            //             i++ ; 
-            //         }else if(arr[k] == maxi && arr[i] + arr[j] <= maxi){
-            //             count += (j - i);
-            //             i++ ; 
-            //         }
-            //         j-- ; 
-            //     }
-            //     k-- ; 
-            // }
-
-            while(k >= 2){
-                i = 0 ; 
-                j = k-1 ; 
-                while(i < j){
-                    if(arr[k] == maxi && arr[i] + arr[j] > arr[k] ||
-                       arr[k] != maxi && arr[i] + arr[j] + arr[k] > maxi){
-                        count+= (j-i);
-                        j-- ; 
-                    }else{
-                        i++ ; 
-                    }
-                }
-                k-- ; 
-            }
-
-            // long total = (long)n*(n-1)*(n-2)/6 ;
-            // long ans = (long)total - count ; 
-            sb.append(count);
-            sb.append("\n");
         }
         System.out.println(sb.toString());
         br.close();
@@ -88,6 +60,7 @@ public class cp123{
         segTree[i] = merge(segTree[2*i+1] ,segTree[2*i+2]);
     }
     public static int rangeSumSq(int i , int l , int r , int start , int end){
+        propogate(i , l , r);
         if(l > end || r < start){
             return 0; 
         }
@@ -97,11 +70,8 @@ public class cp123{
         int mid = l + (r - l)/2 ; 
         int left = 0 ; 
         int right = 0 ; 
-        if(idx <= mid){
-            left = rangeSumSq(2*i+1 , l , mid , start , end);
-        }else{
-            right = rangeSumSq(2*i + 2 , mid + 1,  r , start , end);
-        }
+        left = rangeSumSq(2*i+1 , l , mid , start , end);
+        right = rangeSumSq(2*i + 2 , mid + 1,  r , start , end);
         return left + right ; 
     }
     public static void rangeUpdate(int[] arr , int val , int i , int l , int r , int start ,int end){
@@ -110,11 +80,13 @@ public class cp123{
             return ; 
         }
         if(l >= start && r <= end){
-            segTree[i].sumSq += (r-l+1)*val*val + 2*val*(segTree[i].sum);
+            segTree[i].sumSq += (r-l+1)*1L*val*val + 2L*val*(segTree[i].sum);
+            segTree[i].sum += (r-l+1)*1L*val ;
             if(r != l){
                 lazyTree[2*i+1] += val ; 
                 lazyTree[2*i+2] += val ;
             }
+            return ;
         }
         int mid = l + (r - l)/2 ; 
         rangeUpdate(arr , val , 2*i+1 , l , mid , start ,end);
@@ -124,6 +96,7 @@ public class cp123{
     public static void propogate(int i , int l , int r){
         if(lazyTree[i] == 0) return ;
         segTree[i].sumSq += (r-l+1)*lazyTree[i]*lazyTree[i] + lazyTree[i]*2*(segTree[i].sum);
+        segTree[i].sum += (r-l+1)*lazyTree[i]*1L ; 
         if(l != r){
             lazyTree[2*i+1] += lazyTree[i];
             lazyTree[2*i+!] += lazyTree[i];
