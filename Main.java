@@ -9,57 +9,107 @@ public class Main {
     public static void main(String[] args)throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-
         StringTokenizer st = new StringTokenizer(br.readLine());
         int n = Integer.parseInt(st.nextToken());
-        int q = Integer.parseInt(st.nextToken());
-
-        Node[] pc = new Node[n];
-        for(int i = 0 ; i < n ; i++){
-            pc[i] = new Node(null , "");
-        }
-        Node server = new Node(null , "");
-
-        while(q-- > 0){
+        int m = Integer.parseInt(st.nextToken());
+        int[][] edges = new int[m][2];
+        for(int i = 0 ; i < m ; i++){
             st = new StringTokenizer(br.readLine());
-            int type = Integer.parseInt(st.nextToken());
+            edges[i][0] = Integer.parseInt(st.nextToken())-1;
+            edges[i][1] = Integer.parseInt(st.nextToken())-1;
+        }
 
-            if(type == 1){
-                int p = Integer.parseInt(st.nextToken())-1;
+        List<List<Integer>> adjList = new ArrayList<>();
+        for(int i = 0 ;i < n ; i++) adjList.add(new ArrayList<>());
+        for(int i = 0 ; i < m ; i++){
+            int u = edges[i][0];
+            int v = edges[i][1];
+            adjList.get(u).add(v);
+            adjList.get(v).add(u);
+        }
+        int operations = 0 ; 
+        boolean[] vis = new boolean[n];
+        // for(int i = 0 ; i < n ; i++){
+        //     if(!vis[i]){
+        //         int[] res = dfs(adjList , i , vis);
+        //         int nodes = res[0];
+        //         int eges = res[1]/2; 
+        //         if(nodes == 1 && eges == 0){
+        //             operations += 2 ;
+        //         }else{
+        //             operations += Math.abs(eges - nodes );
+        //         }
+        //         // if(eges == 0) eges += 2 ;
+        //     }
+        // }
 
-                pc[p] = server;
-            }else if(type == 2){
-                int p = Integer.parseInt(st.nextToken())-1;
-                String s = st.nextToken();
-
-                pc[p] = new Node(pc[p] , s);
-            }else{
-                int p = Integer.parseInt(st.nextToken())-1;
-
-                server = pc[p];
+        for(int i = 0 ; i < n ; i++){
+            if(vis[i] == false){
+                List<Integer> comp = new ArrayList<>();
+                dfsII(adjList , i , vis , comp);
+                if(comp.size() == 1 && adjList.get(comp.get(0)).size() == 0){
+                    operations += 2 ;
+                }else{
+                    int degOpes = 0 ; 
+                    for(int node : comp){
+                        int deg = adjList.get(node).size();
+                        degOpes += Math.abs(deg - 2);
+                    }
+                    operations += degOpes/2 ; 
+                }
             }
         }
-        Stack<String> stack = new Stack<>();
-        Node curr = server ; 
-        while(curr != null){
-            if(curr.append.isEmpty() == false){
-                stack.push(curr.append);
-            }
-            curr = curr.parent ;
-        }
-        while(!stack.isEmpty()){
-            sb.append(stack.pop());
-        }
-        System.out.println(sb.toString());
+        // System.out.println(maxi);
+        // int removed = m - maxi  ; 
+        // // if(maxi == 1) maxi = 0 ; 
+        // int remoainingNodes = n - maxi ; 
+        // int operations = removed + 2*remoainingNodes ;
+        System.out.println(operations);
         br.close();
     }
-    static class Node{
-        Node parent ; 
-        String append ; 
-        public Node(Node p , String a ){
-            this.parent = p ; 
-            this.append = a ; 
+
+    public static void dfsII(List<List<Integer>> adjList , int src , boolean[] vis ,List<Integer> comp){
+        vis[src] = true ; 
+        comp.add(src);
+        for(int next : adjList.get(src)){
+            if(vis[next] == false){
+                dfsII(adjList , next , vis , comp);
+            }
         }
+        return ; 
+    }
+
+    public static int[] dfs(List<List<Integer>> adjList , int src , boolean[] vis){
+        vis[src] = true ; 
+        int totalNodes = 1 ; 
+        int edge = adjList.get(src).size();
+        for(int next : adjList.get(src)){
+            if(vis[next] == false){
+                int[]res = dfs(adjList , next , vis);
+                totalNodes += res[0];
+                edge += res[1];
+            }
+        }
+        return new int[]{totalNodes , edge} ;
+    }
+
+
+
+
+    public static long bs(int[] arr , long target){
+        int l = 0 ; 
+        int r = arr.length - 1 ; 
+        long val = -1 ; 
+        while(l <= r){
+            int mid = l + (r-l)/2 ; 
+            if(arr[mid] <= target){
+                val = arr[mid];
+                l = mid + 1 ;
+            }else{
+                r = mid - 1 ;
+            }
+        }
+        return val ; 
     }
 }
 
@@ -67,46 +117,3 @@ public class Main {
 
 
 
-
-
-
-
-//  while(q-- > 0){
-//             int idx = Integer.parseInt(st.nextToken());
-
-//             if(arr[idx] == 1){
-//                 //it will be 0 
-//                 if(arr[idx+1] == 1 && arr[idx-1] == 1){
-//                     comp++ ; 
-//                 }else if(arr[idx+1] == 0 && arr[idx-1] == 0){
-//                     comp-- ;
-//                 }
-//                 arr[idx] = 0 ; 
-//             }else{
-//                 if(arr[idx+1] == 0 && arr[idx-1] == 0){
-//                     comp++ ;
-//                 }else if(arr[idx+1] == 1 && arr[idx-1] == 1){
-//                     comp-- ;
-//                 }
-//                 arr[idx] =
-//             }
-//             // if(arr[idx] == 0){
-//             //     //it will be changed to 1 , comp will be added only if either side is 0
-//             //     if((idx > 0 && arr[idx-1] == 1 ) && (idx < n-1 && arr[idx+1] == 1) || (idx == 0 && n > 1 && arr[idx+1] == 1) || (idx == n-1 && n > 1 && arr[idx-1] == 1)){
-//             //         comp-- ;
-//             //     }else if(n == 1 || ((idx > 0 && arr[idx-1] == 0 ) && (idx < n-1 && arr[idx+1] == 0)) || (idx == 0 && arr[idx+1] == 0) || (idx == n-1 && arr[idx-1] == 0)){
-//             //         comp++ ; 
-//             //     }
-//             //     arr[idx] = 1 ;
-//             // }else{
-//             //     //it will be toggle to 0 , if both sides are nonzero , comp++ , if only one side is 0 comp same , if both zero comp-- 
-//             //     if((idx > 0 && arr[idx-1] == 1 ) && (idx < n-1 && arr[idx+1] == 1) || (idx == 0 && n > 1 && arr[idx+1] == 1) || (idx == n-1 && n > 1 && arr[idx-1] == 1)){
-//             //         comp++ ;
-//             //     }else if(n == 1 || ((idx > 0 && arr[idx-1] == 0 ) && (idx < n-1 && arr[idx+1] == 0)) || (idx == 0 && arr[idx+1] == 0) || (idx == n-1 && arr[idx-1] == 0)){
-//             //         comp-- ; 
-//             //     }
-//             //     arr[idx] = 0 ;
-//             // }
-//             sb.append(comp);
-//             sb.append("\n");
-//         }
