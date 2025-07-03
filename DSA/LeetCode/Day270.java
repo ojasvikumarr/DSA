@@ -1,4 +1,4 @@
-class Solution {
+class Day270 {
 
     public char kthCharacter(int k) {
         int ans = 0;
