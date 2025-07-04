@@ -15,7 +15,7 @@ class Day271 {
         return (char)('a' + (ans%26));
     }
 
-    public char kthCharacterII(long k, int[] ops) {
+    public char kthCharacterIII(long k, int[] ops) {
         StringBuilder sb = new StringBuilder();
         sb.append("a");
         for(int i = 0 ; i < ops.length ; i++){
