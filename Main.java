@@ -9,107 +9,170 @@ public class Main {
     public static void main(String[] args)throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int[][] edges = new int[m][2];
-        for(int i = 0 ; i < m ; i++){
-            st = new StringTokenizer(br.readLine());
-            edges[i][0] = Integer.parseInt(st.nextToken())-1;
-            edges[i][1] = Integer.parseInt(st.nextToken())-1;
-        }
+        int t = Integer.parseInt(br.readLine());
+        while(t-- > 0){
+            int n = Integer.parseInt(br.readLine());
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            long[] arr = new long[n];
 
-        List<List<Integer>> adjList = new ArrayList<>();
-        for(int i = 0 ;i < n ; i++) adjList.add(new ArrayList<>());
-        for(int i = 0 ; i < m ; i++){
-            int u = edges[i][0];
-            int v = edges[i][1];
-            adjList.get(u).add(v);
-            adjList.get(v).add(u);
-        }
-        int operations = 0 ; 
-        boolean[] vis = new boolean[n];
-        // for(int i = 0 ; i < n ; i++){
-        //     if(!vis[i]){
-        //         int[] res = dfs(adjList , i , vis);
-        //         int nodes = res[0];
-        //         int eges = res[1]/2; 
-        //         if(nodes == 1 && eges == 0){
-        //             operations += 2 ;
-        //         }else{
-        //             operations += Math.abs(eges - nodes );
-        //         }
-        //         // if(eges == 0) eges += 2 ;
-        //     }
-        // }
+            Map<Long , Integer> neg = new HashMap<>();
+            Map<Long , Integer> po = new HashMap<>();
+            int negs = 0 ; 
+            int pos = 0 ; 
 
-        for(int i = 0 ; i < n ; i++){
-            if(vis[i] == false){
-                List<Integer> comp = new ArrayList<>();
-                dfsII(adjList , i , vis , comp);
-                if(comp.size() == 1 && adjList.get(comp.get(0)).size() == 0){
-                    operations += 2 ;
+            for(int i = 0 ; i < n ; i++){
+                arr[i] = Long.parseLong(st.nextToken());
+                if(arr[i] < 0){
+                    arr[i] = -arr[i];
+                    neg.put(arr[i] , neg.getOrDefault(arr[i] , 0)+1);
+                    negs++ ; 
                 }else{
-                    int degOpes = 0 ; 
-                    for(int node : comp){
-                        int deg = adjList.get(node).size();
-                        degOpes += Math.abs(deg - 2);
-                    }
-                    operations += degOpes/2 ; 
+                    po.put(arr[i] , po.getOrDefault(arr[i] , 0)+1);
+                    pos++ ;
                 }
             }
-        }
-        // System.out.println(maxi);
-        // int removed = m - maxi  ; 
-        // // if(maxi == 1) maxi = 0 ; 
-        // int remoainingNodes = n - maxi ; 
-        // int operations = removed + 2*remoainingNodes ;
-        System.out.println(operations);
-        br.close();
-    }
 
-    public static void dfsII(List<List<Integer>> adjList , int src , boolean[] vis ,List<Integer> comp){
-        vis[src] = true ; 
-        comp.add(src);
-        for(int next : adjList.get(src)){
-            if(vis[next] == false){
-                dfsII(adjList , next , vis , comp);
+
+            Arrays.sort(arr);
+            long r = arr[1]/arr[0];
+            boolean flag = true ; 
+            if(n > 2){
+                long num = arr[1];
+                long den = arr[0];
+                for(int i = 1 ; i < n-1 ; i++){
+                    if(arr[i+1]*den != arr[i]*num){
+                        flag = false ; 
+                        break ; 
+                    }
+                }
             }
-        }
-        return ; 
-    }
-
-    public static int[] dfs(List<List<Integer>> adjList , int src , boolean[] vis){
-        vis[src] = true ; 
-        int totalNodes = 1 ; 
-        int edge = adjList.get(src).size();
-        for(int next : adjList.get(src)){
-            if(vis[next] == false){
-                int[]res = dfs(adjList , next , vis);
-                totalNodes += res[0];
-                edge += res[1];
+            if(flag == false){
+                sb.append("No");
+                sb.append("\n");
+                continue ;
             }
-        }
-        return new int[]{totalNodes , edge} ;
-    }
 
-
-
-
-    public static long bs(int[] arr , long target){
-        int l = 0 ; 
-        int r = arr.length - 1 ; 
-        long val = -1 ; 
-        while(l <= r){
-            int mid = l + (r-l)/2 ; 
-            if(arr[mid] <= target){
-                val = arr[mid];
-                l = mid + 1 ;
+            if((pos == n || negs == n)){
+                sb.append("Yes");
+                sb.append("\n");
+                continue ;
             }else{
-                r = mid - 1 ;
+                boolean flagA = true; 
+                Map<Long , Integer> Apos = new HashMap<>(po);
+                Map<Long , Integer> Aneg = new HashMap<>(neg);
+
+                for(int i = 0 ; i < n ; i++){
+                    long a = arr[i];
+                    if(i%2 == 0){
+                        int c = Apos.getOrDefault(a , 0);
+                        if(c == 0){
+                            flagA = false ; 
+                            break ; 
+                        }
+                        Apos.put(a , c-1);
+                    }else{
+                        int c = Aneg.getOrDefault(a , 0);
+                        if(c == 0){
+                            flagA = false ; 
+                            break ; 
+                        }
+                        Aneg.put(a , c-1);
+                    }
+                }
+                boolean flagB = true; 
+                Map<Long , Integer> Bpos = new HashMap<>(po);
+                Map<Long , Integer> Bneg = new HashMap<>(neg);
+
+                for(int i = 0 ; i < n ; i++){
+                    long a = arr[i];
+                    if(i%2 != 0){
+                        int c = Bpos.getOrDefault(a , 0);
+                        if(c == 0){
+                            flagB = false ; 
+                            break ; 
+                        }
+                        Bpos.put(a , c-1);
+                    }else{
+                        int c = Bneg.getOrDefault(a , 0);
+                        if(c == 0){
+                            flagB = false ; 
+                            break ; 
+                        }
+                        Bneg.put(a , c-1);
+                    }
+                }
+
+                if(flagA || flagB){
+                    sb.append("Yes");
+                }else{
+                    sb.append("No");
+                }
+                sb.append("\n");
+                continue ;
             }
+            // if(neg.size() > 0 && flag ){
+            //     //now assign neg values 
+            //     if(neg.size() == 1){
+            //         //that is toggling is happening 
+            //         if(n%2 == 0){
+            //             if(neg.get(arr[0]) != n/2){
+            //                 flag = false ;
+            //             }
+            //         }else{
+            //             //it can be n/2 or n/2 + 1
+            //             if(neg.get(arr[0]) == n/2 || neg.get(arr[0]) == n/2 + 1){
+            //                 flag = true ;
+            //             }else{
+            //                 flag = false ;
+            //             }
+            //         }
+            //     }else{
+            //         //toggle 
+            //         if(neg.containsKey(arr[0])){
+            //             for(int i = 0 ; i < n ; i += 2){
+            //                 if(neg.get(arr[i]) == 0){
+            //                     flag = false ; 
+            //                     break ; 
+            //                 }else{
+            //                     neg.put(arr[i] , neg.get(arr[i]) - 1);
+            //                 }
+            //             }
+            //             for(int key : neg.keySet()){
+            //                 if(neg.get(key) > 0){
+            //                     flag = false ; 
+            //                     break ;
+            //                 }
+            //             }
+            //         }else{
+            //             for(int i = 1 ; i < n ; i += 2){
+            //                 if(neg.get(arr[i]) == 0){
+            //                     flag = false ; 
+            //                     break ; 
+            //                 }else{
+            //                     neg.put(arr[i] , neg.get(arr[i]) - 1);
+            //                 }
+            //             }
+            //             for(int key : neg.keySet()){
+            //                 if(neg.get(key) > 0){
+            //                     flag = false ; 
+            //                     break ;
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+           
+
+            // if(flag){
+            //     sb.append("Yes");
+            // }else{
+            //     sb.append("No");
+            // }
+            // sb.append("\n");
         }
-        return val ; 
+        System.out.println(sb.toString());
+
+        br.close();
     }
 }
 
