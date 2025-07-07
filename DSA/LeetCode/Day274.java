@@ -1,4 +1,4 @@
-class FindSumPairs {
+class Day274 {
     int[] nums ; 
     Map<Integer, Integer> map ; 
     Map<Integer , Integer> idx ; 
