@@ -1,4 +1,4 @@
-class Solution {
+class Day280 {
     public int maxValue(int[][] events, int k) {
         // WHY NO GREEDY??
         // If i go for the largest meeting for example , it allowed to go in two 
