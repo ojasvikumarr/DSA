@@ -1,4 +1,4 @@
-public class Solution {
+public class Day281 {
 
     public int maxFreeTime(
         int eventTime,
