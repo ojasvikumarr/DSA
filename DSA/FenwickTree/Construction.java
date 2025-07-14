@@ -9,6 +9,7 @@ public class Construction {
         for(int i = 0 ; i < arr.length ; i++){
             update(i , arr[i]);
         }
+        // List<Integer> ls = Collections.unmodifiableList(Arrays.asList(bit));
     }
     public static void update(int idx , int val){
         idx++ ;//As its is 1 indexed
