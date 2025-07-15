@@ -2,7 +2,7 @@ class Day287 {
     public boolean isValid(String word) {
         Set<Character> set = new HashSet<>(Arrays.asList('a' , 'e' , 'i' , 'o' , 'u' , 
                                                          'A' , 'E' , 'I' , 'O' , 'U'));
-
+//hello
         if(word.length() < 3){
             return false ;
         }
