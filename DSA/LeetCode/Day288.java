@@ -1,4 +1,4 @@
-class Solution {
+class Day288 {
 
     public int maximumLength(int[] nums) {
         int res = 0;
