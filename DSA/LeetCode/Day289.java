@@ -1,19 +1,19 @@
 class Solution {
     public int maximumLength(int[] nums) {
-        // int n = nums.length ; 
-        // dp = new int[n][n+1];
+        int n = nums.length ; 
+        dp = new int[n][n+1];
 
-        // for(int[] row : dp) Arrays.fill(row , -1);
-        // int zeroRem = solve(nums , 0 , n , 0 );
+        for(int[] row : dp) Arrays.fill(row , -1);
+        int zeroRem = solve(nums , 0 , n , 0 );
 
-        // for(int[] row : dp) Arrays.fill(row , -1);
-        // int oneRem = solve(nums , 0 , n , 1 );
-        // return Math.max(zeroRem , oneRem);
+        for(int[] row : dp) Arrays.fill(row , -1);
+        int oneRem = solve(nums , 0 , n , 1 );
+        return Math.max(zeroRem , oneRem);
 
-        // int zero = solve(nums , 0);
-        // int one = solve(nums , 1);
+        int zero = solve(nums , 0);
+        int one = solve(nums , 1);
 
-        // return Math.max(zero , one);
+        return Math.max(zero , one);
 
         return solve(nums);
     }
@@ -86,11 +86,6 @@ class Solution {
     //     }
     //     return lo ; 
     // }
-
-
-
-
-
 
 
 
