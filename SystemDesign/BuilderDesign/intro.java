@@ -73,6 +73,10 @@ public class Car{
 
 }
 
+
+// Used for custom Object creation 
+// Like custom meal creation 
+
 public static class Main{
     public static void main(String[] args){
         //because it was set as static , so we can call directly by name
@@ -86,6 +90,12 @@ public static class Main{
                         .build() ;
 
         Car car2 = builder.setEngine("V12")
+                        .setWheels("4")
+                        .setSeats(2)
+                        .setColor("Blue")
+                        .setSunRoof(false)
+                        .build() ;
+        Car car3 = builder.setEngine("V12")
                         .setWheels("4")
                         .setSeats(2)
                         .setColor("Blue")
