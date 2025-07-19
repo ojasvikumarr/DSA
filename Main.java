@@ -10,118 +10,77 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
         StringTokenizer st = new StringTokenizer(br.readLine());
+        int h = Integer.parseInt(st.nextToken());
+        int w = Integer.parseInt(st.nextToken());
 
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
+        long[][] arr = new long[h+1][w+1];
+        for(int i = 1 ; i <= h ; i++){
+            st = new StringTokenizer(br.readLine());
+            for(int j = 1 ; j <= w ; j++){
+                arr[i][j] = Long.parseLong(st.nextToken());
+            }
+        }
 
+        long[] p = new long[h+w];
         st = new StringTokenizer(br.readLine());
-        long[] arr = new long[n];
-        for(int i = 0 ; i < n ; i++){
-            arr[i] = Long.parseLong(st.nextToken());
+        for(int i = 1 ; i <= h + w-1 ; i++){
+            p[i] = Long.parseLong(st.nextToken());
         }
+        map.clear();
+        Pair ans = dfs(arr , p , h , w);
 
-        if(m == n){
-            System.out.println(0);
-            return ; 
-        }
-
-        Arrays.sort(arr);
-
-        long[] gaps = new long[n-1];
-
-        for(int i = 0 ; i < n ; i++){
-            gaps[i] = arr[i+1] - arr[i];
-        }
-
-        init(n);
-
-
-        
+        System.out.println(ans.req);
         br.close();
     }
-    static int[] segTree; 
-    public static void init(int n ,long[] gaps){
-        segTree = new int[4*n] ; 
-        buildTree();
-    }
-    public static void buildTree(int i , int l , int r , long[] gaps){
-        if(l == r){
-            segTree[i] = l ; 
-            return ; 
+    public static class Pair{
+        long req ; 
+        long sum ; 
+        public Pair(long r , long s){
+            this.req = r ; 
+            this.sum = s ;
         }
-        int mid = l + (r - l)/2 ; 
-        buildTree(2*i + 1 , l , mid , gaps);
-        buildTree(2*i + 2 , mid +1 , r , gaps);
-        int left = segTree[2*i + 1];
-        int right = segTree[2*i + 2];
-        if(gaps[left] >= gaps[right]){
-            segTree[i] = left ;
+    }
+    static Map<Long , Pair> map = new HashMap<>();
+    
+    public static Pair dfs(long[][] arr , long[] p , int i , int j ){
+        if(i == 0 || j == 0){
+            return new Pair(Long.MAX_VALUE/2 , Long.MIN_VALUE/2);
+        }
+
+        long key =( ((long)i<<32) | j) ; 
+        if(map.containsKey(key)){
+            return map.get(key);
+        }
+
+        int k = i + j - 1; 
+        long gain = arr[i][j] - p[k];
+        Pair res ; 
+        if(i == 1 && j == 1){
+            long sum = gain ; 
+            long req = -1 ; 
+            if(sum < 0){
+                req = - sum ; 
+            }else{
+                req = 0 ; 
+            }
+            res = new Pair(req , sum);
         }else{
-            segTree[i] = right ;
+            Pair fromTop = dfs(arr , p , i-1 , j);
+            Pair fromLeft = dfs(arr , p ,i , j-1);
+
+            res = fromTop.req <= fromLeft.req ? fromTop : fromLeft ; 
+
+            long newSum = res.sum + gain ; 
+            long newReq = res.req ; 
+            if(newSum < 0){
+                newReq = Math.max(newReq , -newSum);
+            }
+            res = new Pair(newReq , newSum);
         }
+
+        map.put(key , res);
+        return map.get(key);
     }
-
-    public static int query(int i , int l , int r , int start , int end , long[] gaps){
-        if(l > end || r < start) return -1 ; 
-        if(l >= start && r <= end){
-            return segTree[i];
-        }
-
-        int mid = l + (r - l)/2 ; 
-        int left = query(2*i +1 , l , mid , start , end , gaps);
-        int right = query(2*i +2 , mid  + 1 , r , start , end , gaps);
-        if(left == -1){
-            return right ; 
-        }else if(right == -1){
-            return left ;
-        }
-        if(gaps[left] >= gaps[right]) return left ; 
-        return right ;
-    }
-
-    public static long[] bestSplit(int l , int r , long[] arr , long[] gaps , int gN){
-        int n = arr.length ; 
-        long orginal = cost(arr[l] , arr[r]);
-        int k = query(0 , 0 , n-1 , l , r-1 , gaps);
-
-        long leftCost = cost(arr[l] , arr[k]);
-        long rightCost = cost(arr[k+1] ,arr[r] );
-        long saving = orginal - leftCost - rightCost ; 
-        return new Segment(l , r , k , saving);
-    }
-
-    public static long ocst(long l , long r){
-        long span = r - l ; 
-        if(span <= 2) return 0 ; 
-        long need = (span + 1)/2 ; 
-        int x = 0 ; 
-        long power = 1 ; 
-        while(power < need){
-            power = power<<1 ; 
-            x++ ; 
-        }
-        return x ; 
-    }
+   
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
