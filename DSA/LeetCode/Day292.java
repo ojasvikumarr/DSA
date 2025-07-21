@@ -32,13 +32,7 @@ class Solution {
         if (node.children.isEmpty()) return; // if it is a leaf node, no operation is needed.
 
         List<String> v = new ArrayList<>();
-        for (Map.Entry<String, Trie> entry : node.children.entrySet()) {
-            construct(entry.getValue(), freq);
-            v.add(entry.getKey() + "(" + entry.getValue().serial + ")");
-        }
-
-        Collections.sort(v);
-        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, Trie> entry : node.children.entrySet
         for (String s : v) {
             sb.append(s);
         }
