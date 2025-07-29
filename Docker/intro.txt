@@ -1,0 +1,56 @@
+Docker is a tool where it allows you to run your application in a 
+container which is a small lightweight and portable environment 
+that includes everything your app needs 
+
+Docker image is like class and docker container are like objects of that class 
+
+Docker image are blueprints that contains the code and everything the code 
+requires to run ( OS , libraries etc)
+
+a docker container is a running instance of a docker image 
+it like taking the blueprint(image) and building a live , working
+app from it 
+
+cmds to list all local images 
+docker images 
+docker rmi <image_name> 
+docker image prune (remove unused images , prunign of tree)
+docker buuld -t <image_name>
+
+port binding 
+docker run -p <host port> : <containerport> <img>
+set env variables 
+docker run -r <var_name> = <var_vale> <container_name/id>
+
+docker start <container_name>
+docker stop <container_name> 
+
+docker image is formed of layer , the way intructions are to be performed 
+each layer represents a layer int eh dockerfile
+(like installing a package , copying file etc)
+
+container - layer 1 - layer 2 - base layer 
+
+when a new version of image is available then old layers are not installed 
+only the new ones are installed and stacked on top of old ones 
+
+Port Binding , 
+the container ports are different from the computer ports 
+so when a port eg 2020 is occupied in the computer ,then too we can use 
+container port as 2020 , while binding contianer port 2020 with other free port
+of the computer 
+
+
+Docker vs Virtual machine 
+it can be thought of as , virtual machine being the a solo ship with its own engine , that is a separate 
+entit itself running independently , having its own resources and access to processor 
+
+while docker can be thought of as a container in a ship that is it works int he same environment as other 
+but it has its own boundries 
+docker does the virtualization at the application layer , that is the interaction of user with the services
+virtual machine virtualizes the kernel itself 
+
+docker was built o linux based systems , so most of the images are based on OS itself , to solve this we use docker desktop 
+
+it adds a light weight hypervisor layer over the system which internally ses a lightweight linus distribution 
+this allows us to run our continaer on our systems 
