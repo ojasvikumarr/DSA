@@ -20,7 +20,6 @@ public class SeiveOfEratothenes {
             if(arr[i] == true){
                 //i mark all multiples of it as false 
                 // arr[i] = true ; 
-                // if(2*i <= n){
                     for(int j = i*i ; j <= n ; j += i){
                         if(j%i == 0){
                             arr[j] = false ;
