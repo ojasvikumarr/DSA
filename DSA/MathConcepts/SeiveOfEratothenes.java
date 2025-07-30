@@ -26,7 +26,6 @@ public class SeiveOfEratothenes {
                             arr[j] = false ;
                         }
                     }
-                // }
             }
         }
         StringBuilder sb = new StringBuilder();
