@@ -9,78 +9,96 @@ public class Main {
     public static void main(String[] args)throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int h = Integer.parseInt(st.nextToken());
-        int w = Integer.parseInt(st.nextToken());
 
-        long[][] arr = new long[h+1][w+1];
-        for(int i = 1 ; i <= h ; i++){
-            st = new StringTokenizer(br.readLine());
-            for(int j = 1 ; j <= w ; j++){
-                arr[i][j] = Long.parseLong(st.nextToken());
+        int t = Integer.parseInt(br.readLine());
+        while(t-- > 0){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int n = Integer.parseInt(st.nextToken());
+            int m = Integer.parseInt(st.nextToken());
+            int x = Integer.parseInt(st.nextToken()) -1;
+            int y = Integer.parseInt(st.nextToken()) -1;
+            List<List<Integer>> adjList = new ArrayList<>();
+            for(int i = 0 ; i < n ; i++) adjList.add(new ArrayList<>());
+            for(int i = 0 ; i < m ; i++){
+                st = new StringTokenizer(br.readLine());
+                int u = Integer.parseInt(st.nextToken()) - 1;
+                int v = Integer.parseInt(st.nextToken()) - 1;
+                adjList.get(u).add(v);
+                adjList.get(v).add(u);
+            }
+            for(int i = 0 ; i < n ; i++){
+                Collections.sort(adjList.get(i));
+            }
+            // res = new ArrayList<>();
+            // Set<Integer> set = new HashSet<>();
+            // set.add(x);
+            // solve(adjList , x , y , set , new ArrayList<>());
+            // sb.append((x + 1 )+ " ");
+            // for(int i = 0 ; i < res.size() ; i++){
+            //     sb.append((res.get(i) + 1) + " ");
+            // }
+            // // sb.append((y+1));
+
+            boolean[] visited = new boolean[n];
+            List<Integer> path = new ArrayList<>();
+
+            int curr = x ; 
+            visited[curr] = true ; 
+            path.add(curr);
+
+            while(curr != y){
+                boolean[] reached = new boolean[n];
+                Queue<Integer> q = new LinkedList<>();
+                reached[y] = true ;
+                q.add(y);
+                while(!q.isEmpty()){
+                    int w = q.poll();
+                    for(int next : adjList.get(w)){
+                        if(visited[next] == false && reached[next] == false){
+                            reached[next] = true ; 
+                            q.add(next);
+                        }
+                    }
+                }
+
+                for(int next : adjList.get(curr)){
+                    if(visited[next] == false && reached[next] == true){
+                        visited[next] = true ; 
+                        curr = next ; 
+                        path.add(curr);
+                        break ; 
+                    }
+                }
+            }
+
+            for(int ele : path){
+                sb.append((ele + 1) + " ");
+            }
+
+            sb.append("\n");
+        }
+        System.out.println(sb.toString());
+    }
+    static List<Integer> res ;
+
+    public static boolean solve(List<List<Integer>> adjList , int src , int dest , Set<Integer> vis , List<Integer> ls ){
+        if(src == dest){
+            res = new ArrayList<>(ls);
+            return true; 
+        }
+        // Collections.sort(adjList.get(src));
+        for(int next : adjList.get(src)){
+            if(vis.contains(next) == false){
+                vis.add(next);
+                ls.add(next);
+                if( solve(adjList , next , dest , vis , ls) ){
+                    return true ;
+                }
+                ls.remove(ls.size() - 1);
+                vis.remove(next);
             }
         }
-
-        long[] p = new long[h+w];
-        st = new StringTokenizer(br.readLine());
-        for(int i = 1 ; i <= h + w-1 ; i++){
-            p[i] = Long.parseLong(st.nextToken());
-        }
-        map.clear();
-        Pair ans = dfs(arr , p , h , w);
-
-        System.out.println(ans.req);
-        br.close();
+        return false ;
     }
-    public static class Pair{
-        long req ; 
-        long sum ; 
-        public Pair(long r , long s){
-            this.req = r ; 
-            this.sum = s ;
-        }
-    }
-    static Map<Long , Pair> map = new HashMap<>();
-    
-    public static Pair dfs(long[][] arr , long[] p , int i , int j ){
-        if(i == 0 || j == 0){
-            return new Pair(Long.MAX_VALUE/2 , Long.MIN_VALUE/2);
-        }
-
-        long key =( ((long)i<<32) | j) ; 
-        if(map.containsKey(key)){
-            return map.get(key);
-        }
-
-        int k = i + j - 1; 
-        long gain = arr[i][j] - p[k];
-        Pair res ; 
-        if(i == 1 && j == 1){
-            long sum = gain ; 
-            long req = -1 ; 
-            if(sum < 0){
-                req = - sum ; 
-            }else{
-                req = 0 ; 
-            }
-            res = new Pair(req , sum);
-        }else{
-            Pair fromTop = dfs(arr , p , i-1 , j);
-            Pair fromLeft = dfs(arr , p ,i , j-1);
-
-            res = fromTop.req <= fromLeft.req ? fromTop : fromLeft ; 
-
-            long newSum = res.sum + gain ; 
-            long newReq = res.req ; 
-            if(newSum < 0){
-                newReq = Math.max(newReq , -newSum);
-            }
-            res = new Pair(newReq , newSum);
-        }
-
-        map.put(key , res);
-        return map.get(key);
-    }
-   
 
 }
