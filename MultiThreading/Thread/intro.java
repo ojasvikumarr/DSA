@@ -1,5 +1,6 @@
 import java.lang.Thread ;
 import java.lang.Runnable ;
+
 public class intro{
 
     //we can only inherit/extend only one class thus this is drawback of extend thread interface
@@ -67,13 +68,13 @@ public class intro{
     // THREAD SAFETY   
     * refers to code that runs multiple thread safely without any issue 
     * it is achieved by 
-    *   1. Synchronization 
-    *   2. Imutable oBjects 
-    *   3. Concurrent Colection
-    *   4. atomic variable 
+    *   1. Synchronization , Semaphores or synchronized keyword
+    *   2. Imutable oBjects , string
+    *   3. Concurrent Collection , java concurrent collection framework
+    *   4. atomic variable , instead of using synchronized keyword ,we can simply use atomic variable 
     *   5. thread loval variable 
     * 
-    *  If an exception occurs while excution of the thread then , the thread is terminated 
+    *  If an exception occurs while excution of the thread then , the thread is terminated
     * The excetion does not propogate o the parent node and doesnot affect other threads 
     * 
     * Difference between Sleep and wait 

@@ -1,6 +1,7 @@
 import java.utils.concurrent.locks ; 
 
 // why use explicit locks instead of semaphore ? 
+
 // - beacuse of greatere access over lock acquire and release 
 // - non block structure acquire and release 
 // - timed lock or scheduled lock for a specified tiem 
@@ -15,7 +16,7 @@ public void increment(){
     counter++ ; 
     lock.unlock();
 }
-
+multiple read and isolated updation can be done 
 // Reentrant Lock also called read write lock 
 
 // I) Multipler threads need to read : 
@@ -25,6 +26,22 @@ public void increment(){
 
 public synchronized void increment(){
     counter++ ; 
+}
+class Ojasvi{
+    Ojasvi kumar ; 
+    private Ojasvi(){
+        this.kumar = new Ojasvi();
+    }
+    public static Ojasvi getOjasvi(){
+        synchronized(Ojasvi.class){
+            if(kumar == null){
+                synchronized(Ojasvi.class){
+                    return new Ojasvi();
+                }
+            }
+        }
+        return kumar ; 
+    }
 }
 class Logger{
     Logger instance ;
@@ -43,32 +60,33 @@ class Logger{
         return instance ;
     }
 }
-// Synchronized lock are built in the language they automatically acquire and release 
-// intrinsic locks , they are simple to use but have blocking behaviour , 
-// you cannot acquire syncronized lock with a time out 
-// automatic relear of synchronised locks when the block/methods ends 
-// even if exception occurs 
 
-// while in reenrant lock you must explicitly call unlcok() to release
+Synchronized lock are built in the language they automatically acquire and release 
+intrinsic locks , they are simple to use but have blocking behaviour , 
+you cannot acquire syncronized lock with a time out 
+automatic relear of synchronised locks when the block/methods ends 
+even if exception occurs 
 
-// Semaphore is a variable or object used to control access to shared resources 
-// by multiple threads , allowing a limited number of threads to access the 
-// resource concurrently 
+while in reenrant lock you must explicitly call unlcok() to release
 
-// for example , if semaphore is initialized to 2 , then 2 threads can access the 
-// resource simultaneously 
+Semaphore is a variable or object used to control access to shared resources 
+by multiple threads , allowing a limited number of threads to access the 
+resource concurrently 
 
-// used for thread synchonization , access control , limiting concurrent access , 
-// producer consume pattern , mutual exclusion 
+for example , if semaphore is initialized to 2 , then 2 threads can access the 
+resource simultaneously 
 
-// when there are no permits available then the thread is gone in blocked state 
+used for thread synchonization , access control , limiting concurrent access , 
+producer consume pattern , mutual exclusion 
 
-// semaphore has two operations 
-// acquire and release 
+when there are no permits available then the thread is gone in blocked state 
 
-// type of semaphore  : 
-// binary semaphore 
-// has only two states 0 or 1 , used to implement mutex or locks 
+semaphore has two operations 
+acquire and release 
+
+type of semaphore  : 
+binary semaphore 
+has only two states 0 or 1 , used to implement mutex or locks 
 
 import java.util.concurrent.Semaphore ; 
 public class intro{
@@ -80,6 +98,18 @@ public class intro{
         mutex.release();
     }
 }
+
+import java.util.concurrent.Semaphore ;
+public class main{
+    private static final Semaphore mutex = new Semaphore(1);
+    private static final int counter = 0 ; 
+    public void increment(){
+        mutex.acquire();
+        counter++ ; 
+        mutex.release();
+    }
+}
+
 
 Counting semaphore, 
 reader writer problem , many readers ( sharing a resource to read )
