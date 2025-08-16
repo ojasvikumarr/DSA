@@ -10,4 +10,4 @@ class Solution {
         }
         return solve((double)x/4);
     }
-}
+}Day317.ja
