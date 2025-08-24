@@ -69,4 +69,4 @@ class Solution {
         int[][] rgrid = rotate(grid);
         return Math.min(solve(grid), solve(rgrid));
     }
-}
+}ay
